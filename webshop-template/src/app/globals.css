@@ -6,11 +6,11 @@
 }
 
 @theme {
-  --color-primary: #2563eb; /*Voor buttons, links en accentkleuren*/
-  --color-primary-light: #60a5fa; /*Voor hover-effecten en lichte accenten*/
-  --color-primary-dark: #1e40af; /*Voor actieve states, headers*/
+  --color-primary: #3b82f6; /* Voor buttons, links en accentkleuren */
+  --color-primary-light: #60a5fa; /* Voor hover-effecten en lichte accenten */
+  --color-primary-dark: #1e40af; /* Voor actieve states, headers */
   --color-secondary: #3b82f6; /* */
-  --color-muted: #e0f2fe; /* achtergrond voor cards of notificaties*/
+  --color-muted: #e0f2fe; /* Achtergrond voor cards of notificaties */
 }
 
 @theme inline {

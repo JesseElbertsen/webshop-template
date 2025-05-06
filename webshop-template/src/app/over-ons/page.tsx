@@ -4,7 +4,7 @@ export default async function OverOnsPage() {
   const data = await getPageContent("over-ons");
 
   return (
-    <div className="prose max-w-2xl mx-auto min-h-screen">
+    <div className="prose  mx-auto min-h-screen container  md:px-4 md:py-8">
       <h1>{data.title}</h1>
       <p>{data.body}</p>
     </div>

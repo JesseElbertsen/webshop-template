@@ -21,10 +21,10 @@ const Navbar = () => {
   return (
     <nav className=" top-0 w-full z-50  text-xl">
       {/* Desktop Navbar */}
-      <div className="hidden md:flex justify-end bg-muted backdrop-blur-md text-white py-4 px-10 relative">
+      <div className="hidden md:flex justify-end items-center bg-muted h-[6rem] backdrop-blur-md text-white py-4 px-10 relative">
         <ul className="flex space-x-10">
           {navLinks.map((link, index) => (
-            <li key={index} className=" group">
+            <li key={index} className="group">
               <a
                 href={link.href}
                 className="hover:bg-primary-light transition px-6 py-2 bg-primary rounded-xl"
@@ -32,7 +32,7 @@ const Navbar = () => {
                 {link.name}
               </a>
               {/* Onderstreep-lijn animatie */}
-              <span className="absolute left-0 bottom-[-16px] h-[3px] w-full bg-gradient-to-r bg-primary-100  scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute left-0 bottom-[-16px] h-[3px] w-full bg-gradient-to-r bg-primary-100 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </li>
           ))}
         </ul>

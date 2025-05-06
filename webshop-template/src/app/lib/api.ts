@@ -74,3 +74,27 @@ export async function getDummyProducts() {
     },
   ];
 }
+
+export async function getCarouselImages(carouselId: string) {
+  const carousels: Record<string, { id: string; images: string[] }> = {
+    homepage: {
+      id: "homepage",
+      images: [
+        "/images/banner1.jpg",
+        "/images/banner2.jpg",
+        "/images/banner3.jpg",
+        "/images/banner4.jpg",
+      ],
+    },
+    products: {
+      id: "products",
+      images: [
+        "/images/products1.jpg",
+        "/images/products2.jpg",
+        "/images/products3.jpg",
+      ],
+    },
+  };
+
+  return carousels[carouselId]?.images || [];
+}

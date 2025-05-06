@@ -62,7 +62,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           {/* Acties */}
           <div className="mt-8">
             <button
-              className="w-full bg-blue-600 text-white py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition"
+              className="w-full bg-primary hover:bg-primary-light text-white py-3 rounded-md text-lg font-semibold  transition"
               onClick={() => setIsModalOpen(true)}
             >
               Reserveer dit product

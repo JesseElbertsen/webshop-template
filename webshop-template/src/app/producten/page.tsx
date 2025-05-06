@@ -23,12 +23,10 @@ export default function Page() {
   }, []);
 
   return (
-    <section className="min-h-screen">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
-        ))}
-      </div>
-    </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 container mx-auto md:px-4 md:py-8">
+      {products.map((product, index) => (
+        <ProductCard key={product.id} {...product} index={index} />
+      ))}
+    </div>
   );
 }
