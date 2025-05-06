@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <nav className=" top-0 w-full z-50  text-xl">
       {/* Desktop Navbar */}
-      <div className="hidden md:flex justify-end bg-primary-dark backdrop-blur-md text-white py-4 px-10 relative">
+      <div className="hidden md:flex justify-end bg-muted backdrop-blur-md text-white py-4 px-10 relative">
         <ul className="flex space-x-10">
           {navLinks.map((link, index) => (
             <li key={index} className=" group">
@@ -54,7 +54,7 @@ const Navbar = () => {
 
         {/* Menu Overlay */}
         <div
-          className={`fixed inset-0 bg-primary-dark transform transition-transform duration-300 ${
+          className={`fixed inset-0 bg-muted transform transition-transform duration-300 ${
             open ? "translate-y-0" : "-translate-y-full"
           }`}
         >

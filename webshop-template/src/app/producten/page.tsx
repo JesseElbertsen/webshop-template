@@ -5,7 +5,13 @@ import { getDummyProducts } from "../lib/api";
 
 export default function Page() {
   const [products, setProducts] = useState<
-    { id: string; title: string; image: string; price: number }[]
+    {
+      id: string;
+      title: string;
+      description: string;
+      image: string;
+      price: number;
+    }[]
   >([]);
 
   useEffect(() => {
@@ -17,10 +23,12 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {products.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
-    </div>
+    <section className="min-h-screen">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
+    </section>
   );
 }

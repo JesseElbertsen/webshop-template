@@ -18,7 +18,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   description: "A Build by Jesse Webshop",
 };
@@ -36,7 +35,7 @@ export default function RootLayout({
         <header className="pb-[6rem] md:pb-0">
           <NavBar />
         </header>
-        <main className="container mx-auto md:px-4 md:py-8">{children}</main>
+        <main className="container mx-auto md:px-4 md:py-8 ">{children}</main>
         <footer className="p-4 mt-12 text-sm text-center text-gray-500">
           © 2025 Build by Jesse
         </footer>
