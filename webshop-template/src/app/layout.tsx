@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NavBar from "./components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="p-4 bg-primary text-white">Mijn Webshop</header>
+        <header className="pb-[6rem] md:pb-0">
+          <NavBar />
+        </header>
         <main className="container mx-auto md:px-4 md:py-8">{children}</main>
         <footer className="p-4 mt-12 text-sm text-center text-gray-500">
           © 2025 Build by Jesse
