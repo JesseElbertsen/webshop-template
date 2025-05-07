@@ -7,4 +7,8 @@ export interface Product {
   image: string;
   price: number;
   type: string;
+  sale?: {
+    oldPrice: number;
+    newPrice: number;
+  };
 }

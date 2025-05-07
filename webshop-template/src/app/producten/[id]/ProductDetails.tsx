@@ -44,11 +44,11 @@ export default function ProductDetails({ product }: { product: Product }) {
         <div className="flex flex-col justify-between">
           <div className="font-bold text-gray-500">
             <h1 className="text-3xl font-bold text-black">{product.title}</h1>
-            <div className=" mt-4 bg-white p-4 rounded-md shadow-md">
+            <div className="mt-4 bg-white p-4 rounded-md shadow-md">
               <h2 className="mb-2">Beschrijving:</h2>
               <p>{product.description}</p>
             </div>
-            <div className=" mt-4 bg-white p-4 rounded-md shadow-md">
+            <div className="mt-4 bg-white p-4 rounded-md shadow-md">
               <h2 className="mb-2">Product Informatie:</h2>
               <p>{product.info}</p>
             </div>
@@ -57,9 +57,22 @@ export default function ProductDetails({ product }: { product: Product }) {
           {/* Acties */}
           <div className="mt-8">
             <div className="flex items-center justify-between p-4">
-              <p className="text-green-600 font-bold text-2xl ">
-                €{product.price.toFixed(2)}
-              </p>
+              {product.sale ? (
+                <div className="flex flex-col">
+                  {/* Nieuwe prijs (groen) */}
+                  <p className="text-green-600 font-bold text-2xl">
+                    €{product.sale.newPrice.toFixed(2)}
+                  </p>
+                  {/* Oude prijs (rood, doorstreept) */}
+                  <p className="text-red-500 line-through text-lg">
+                    €{product.sale.oldPrice.toFixed(2)}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-green-600 font-bold text-2xl">
+                  €{product.price.toFixed(2)}
+                </p>
+              )}
               <div>
                 <p className="inline-block bg-gray-400 text-white px-4 py-2 rounded-md">
                   aantal: x {product.amount}
@@ -67,7 +80,7 @@ export default function ProductDetails({ product }: { product: Product }) {
               </div>
             </div>
             <button
-              className="w-full bg-primary hover:bg-primary-light text-white py-3 rounded-md text-lg font-semibold  transition"
+              className="w-full bg-primary hover:bg-primary-light text-white py-3 rounded-md text-lg font-semibold transition"
               onClick={() => setIsModalOpen(true)}
             >
               Reserveer dit product
@@ -78,7 +91,7 @@ export default function ProductDetails({ product }: { product: Product }) {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0  bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Reserveer dit product</h2>
             <form onSubmit={handleSubmit}>

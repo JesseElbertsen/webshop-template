@@ -20,11 +20,15 @@ export default function Page() {
   }, []);
 
   const handleFilterChange = (type: string) => {
-    setFilteredProducts(
-      type === ""
-        ? products
-        : products.filter((product) => product.type === type)
-    );
+    if (type === "sale") {
+      setFilteredProducts(products.filter((product) => product.sale));
+    } else {
+      setFilteredProducts(
+        type === ""
+          ? products
+          : products.filter((product) => product.type === type)
+      );
+    }
   };
 
   const productTypes = Array.from(

@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className=" top-0 w-full z-50 shadow-xl text-xl">
+    <nav className="relative top-0 w-full z-50 shadow-xl text-xl">
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-between items-center bg-muted h-[6rem] backdrop-blur-md text-white py-4 px-10 relative">
         <div className="text-2xl text-black z-50">logo hier</div>

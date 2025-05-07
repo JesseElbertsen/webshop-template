@@ -41,7 +41,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
               </button>
             </div>
             <ul className="space-y-2">
-              {["", ...options].map((option) => (
+              {["", "sale", ...options].map((option) => (
                 <li key={option}>
                   <button
                     className={`w-full text-left px-4 py-2 rounded-md ${
@@ -53,6 +53,8 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
                   >
                     {option === ""
                       ? "Alle producten"
+                      : option === "sale"
+                      ? "Aanbiedingen"
                       : `Type ${option.toUpperCase()}`}
                   </button>
                 </li>
@@ -66,7 +68,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
       <aside className="hidden md:block ">
         <h2 className="text-xl font-bold mb-4">Filter op type</h2>
         <ul className="space-y-2">
-          {["", ...options].map((option) => (
+          {["", "sale", ...options].map((option) => (
             <li key={option}>
               <button
                 className={`w-full text-left px-4 py-2 rounded-md ${
@@ -78,6 +80,8 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
               >
                 {option === ""
                   ? "Alle producten"
+                  : option === "sale"
+                  ? "Aanbiedingen"
                   : `Type ${option.toUpperCase()}`}
               </button>
             </li>

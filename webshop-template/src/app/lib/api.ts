@@ -10,6 +10,10 @@ let products: Product[] = [
     image: "/images/product-a.jpg",
     price: 29.99,
     type: "a",
+    sale: {
+      oldPrice: 39.99,
+      newPrice: 29.99,
+    },
   },
   {
     id: "2",
@@ -30,6 +34,10 @@ let products: Product[] = [
     image: "/images/product-c.jpg",
     price: 19.99,
     type: "c",
+    sale: {
+      oldPrice: 24.99,
+      newPrice: 19.99,
+    },
   },
   {
     id: "4",
@@ -50,6 +58,10 @@ let products: Product[] = [
     image: "/images/product-e.jpg",
     price: 59.99,
     type: "b",
+    sale: {
+      oldPrice: 69.99,
+      newPrice: 59.99,
+    },
   },
   {
     id: "6",
