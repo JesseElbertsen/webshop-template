@@ -36,7 +36,7 @@ export default function RootLayout({
           <NavBar />
         </header>
         <main>{children}</main>
-        <footer className="p-4 bg-primary-dark text-sm text-center text-gray-500">
+        <footer className="p-4 bg-primary text-sm text-center text-gray-500">
           © 2025 Build by Jesse
         </footer>
       </body>

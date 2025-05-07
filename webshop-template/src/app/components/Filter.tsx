@@ -16,7 +16,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
   };
 
   return (
-    <aside className="w-1/4 bg-muted p-4">
+    <aside className=" bg-muted rounded-2xl shadow-2xl min-h-full p-4">
       <h2 className="text-xl font-bold mb-4">Filter op type</h2>
       <ul className="space-y-2">
         {["", ...options].map((option) => (
