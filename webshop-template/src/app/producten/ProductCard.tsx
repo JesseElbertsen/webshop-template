@@ -2,16 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-type Product = {
-  id: string;
-  title: string;
-  description: string;
-  amount: number;
-  type: string;
-  image: string;
-  price: number;
-};
+import { Product } from "../types/types";
 
 export default function ProductCard({
   id,
@@ -20,7 +11,7 @@ export default function ProductCard({
   price,
   description,
   amount,
-  index, // Nieuw: index wordt doorgegeven
+  index,
 }: Product & { index: number }) {
   const { ref, inView } = useInView({
     triggerOnce: true, // Zorg ervoor dat de animatie maar één keer wordt uitgevoerd

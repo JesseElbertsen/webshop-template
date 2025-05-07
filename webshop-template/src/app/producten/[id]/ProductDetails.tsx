@@ -2,16 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-
-type Product = {
-  id: string;
-  title: string;
-  description: string;
-  info: string;
-  amount: number;
-  image: string;
-  price: number;
-};
+import { Product } from "../../types/types";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const [isModalOpen, setIsModalOpen] = useState(false);

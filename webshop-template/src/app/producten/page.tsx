@@ -32,12 +32,14 @@ export default function Page() {
   );
 
   return (
-    <main className="flex min-h-screen">
-      <div className="container w-1/6 md:pr-4 md:pt-8">
+    <main className="flex flex-col md:flex-row gap-4  min-h-screen  md:px-4 md:py-8">
+      {/* Filter */}
+      <div className="bg-muted rounded-2xl shadow-2xl p-4 flex-shrink-0 w-full md:w-64">
         <Filter options={productTypes} onFilterChange={handleFilterChange} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 container mx-auto md:px-4 md:py-8">
+      {/* Product Cards */}
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-7xl">
         {filteredProducts.map((product, index) => (
           <ProductCard key={product.id} {...product} index={index} />
         ))}
