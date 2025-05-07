@@ -35,7 +35,7 @@ export default function Carousel({ carouselId }: CarouselProps) {
   }
 
   return (
-    <div className="relative w-screen overflow-hidden">
+    <div className=" max-w-screen overflow-x-hidden z-10">
       {/* Slides */}
       <div
         className="flex transition-transform duration-500 ease-in-out"

@@ -9,6 +9,7 @@ export default function Page() {
       id: string;
       title: string;
       description: string;
+      amount: number;
       image: string;
       price: number;
     }[]

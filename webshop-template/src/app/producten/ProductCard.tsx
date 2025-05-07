@@ -7,6 +7,7 @@ type Product = {
   id: string;
   title: string;
   description: string;
+  amount: number;
   image: string;
   price: number;
 };
@@ -17,6 +18,7 @@ export default function ProductCard({
   image,
   price,
   description,
+  amount,
   index, // Nieuw: index wordt doorgegeven
 }: Product & { index: number }) {
   const { ref, inView } = useInView({
@@ -45,7 +47,15 @@ export default function ProductCard({
             alt={title}
             className="rounded-md h-40 w-full object-cover"
           />
-          <h2 className="text-lg font-semibold mt-2 p-2 text-black">{title}</h2>
+
+          <div className="flex items-center justify-between p-2">
+            <h2 className="text-lg font-semibold mt-2  text-black">{title}</h2>
+            <div>
+              <p className="inline-block bg- text-gray-400  py-2 rounded-md">
+                aantal: x {amount}
+              </p>
+            </div>
+          </div>
           <p className="bg-white p-2 rounded inset-shadow-2xs h-[6rem] overflow-hidden">
             {description}
           </p>
