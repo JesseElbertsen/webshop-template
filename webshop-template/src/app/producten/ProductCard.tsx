@@ -8,6 +8,7 @@ type Product = {
   title: string;
   description: string;
   amount: number;
+  type: string;
   image: string;
   price: number;
 };

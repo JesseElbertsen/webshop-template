@@ -23,6 +23,7 @@ export async function getDummyProducts() {
       amount: 3,
       image: "/images/product-a.jpg",
       price: 29.99,
+      type: "a", // Nieuw toegevoegd
     },
     {
       id: "2",
@@ -32,6 +33,7 @@ export async function getDummyProducts() {
       amount: 5,
       image: "/images/product-b.jpg",
       price: 49.99,
+      type: "b", // Nieuw toegevoegd
     },
     {
       id: "3",
@@ -41,6 +43,7 @@ export async function getDummyProducts() {
       amount: 2,
       image: "/images/product-c.jpg",
       price: 19.99,
+      type: "c", // Nieuw toegevoegd
     },
     {
       id: "4",
@@ -50,6 +53,7 @@ export async function getDummyProducts() {
       amount: 4,
       image: "/images/product-d.jpg",
       price: 39.99,
+      type: "a", // Nieuw toegevoegd
     },
     {
       id: "5",
@@ -59,6 +63,7 @@ export async function getDummyProducts() {
       amount: 1,
       image: "/images/product-e.jpg",
       price: 59.99,
+      type: "b", // Nieuw toegevoegd
     },
     {
       id: "6",
@@ -68,6 +73,7 @@ export async function getDummyProducts() {
       amount: 2,
       image: "/images/product-f.jpg",
       price: 24.99,
+      type: "c", // Nieuw toegevoegd
     },
     {
       id: "7",
@@ -77,6 +83,7 @@ export async function getDummyProducts() {
       amount: 3,
       image: "/images/product-g.jpg",
       price: 34.99,
+      type: "a", // Nieuw toegevoegd
     },
     {
       id: "8",
@@ -86,6 +93,7 @@ export async function getDummyProducts() {
       amount: 4,
       image: "/images/product-h.jpg",
       price: 44.99,
+      type: "b", // Nieuw toegevoegd
     },
   ];
 }
