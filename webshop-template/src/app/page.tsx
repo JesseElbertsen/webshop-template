@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* SaleItems */}
-      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl mx-auto p-8 text-black pt-24">
+      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl mx-auto md:p-8 text-black pt-8 md:pt-24">
         <SaleItems />
       </div>
     </section>

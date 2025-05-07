@@ -44,7 +44,7 @@ export default function Carousel({ carouselId }: CarouselProps) {
         {images.map((image, index) => (
           <motion.div
             key={index}
-            className="min-w-full h-[450px] flex-shrink-0"
+            className="min-w-full flex-shrink-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
