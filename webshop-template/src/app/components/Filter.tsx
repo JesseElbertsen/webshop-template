@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 type FilterProps = {
-  options: string[]; // Dynamische filteropties
+  options: string[];
   onFilterChange: (filteredOption: string) => void;
 };
 
@@ -12,7 +12,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
 
   const handleOptionChange = (option: string) => {
     setActiveOption(option);
-    onFilterChange(option); // Roep de callback aan met de geselecteerde optie
+    onFilterChange(option);
   };
 
   return (
