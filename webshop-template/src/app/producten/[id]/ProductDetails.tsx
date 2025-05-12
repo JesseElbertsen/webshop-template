@@ -26,6 +26,15 @@ export default function ProductDetails({ product }: { product: Product }) {
     setIsModalOpen(false);
   };
 
+  // Bereken het kortingspercentage
+  const discountPercentage = product.sale
+    ? Math.round(
+        ((product.sale.oldPrice - product.sale.newPrice) /
+          product.sale.oldPrice) *
+          100
+      )
+    : null;
+
   return (
     <div className="min-h-screen md:mt-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
@@ -43,7 +52,14 @@ export default function ProductDetails({ product }: { product: Product }) {
         {/* Productinformatie */}
         <div className="flex flex-col justify-between">
           <div className="font-bold text-gray-500">
-            <h1 className="text-3xl font-bold text-black">{product.title}</h1>
+            <h1 className="text-3xl font-bold text-black flex items-center gap-2 justify-between">
+              {product.title}
+              {discountPercentage && (
+                <span className="bg-red-500 text-white font-bold px-2 py-1 rounded-md">
+                  -{discountPercentage}%
+                </span>
+              )}
+            </h1>
             <div className="mt-4 bg-white p-4 rounded-md shadow-md">
               <h2 className="mb-2">Beschrijving:</h2>
               <p>{product.description}</p>

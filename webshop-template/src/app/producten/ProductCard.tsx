@@ -19,6 +19,11 @@ export default function ProductCard({
     threshold: 0.1,
   });
 
+  // Bereken het kortingspercentage
+  const discountPercentage = sale
+    ? Math.round(((sale.oldPrice - sale.newPrice) / sale.oldPrice) * 100)
+    : null;
+
   return (
     <motion.div
       ref={ref}
@@ -34,13 +39,21 @@ export default function ProductCard({
       <Link href={`/producten/${id}`}>
         <div className="shadow rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
-          <Image
-            width={300}
-            height={300}
-            src={image}
-            alt={title}
-            className="rounded-md h-40 w-full object-cover"
-          />
+          <div className="relative">
+            <Image
+              width={300}
+              height={300}
+              src={image}
+              alt={title}
+              className="rounded-md h-40 w-full object-cover"
+            />
+            {/* Kortingpercentage */}
+            {sale && discountPercentage && (
+              <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md">
+                -{discountPercentage}%
+              </div>
+            )}
+          </div>
           <div className="p-4">
             {/* Titel en aantal */}
             <div className="flex justify-between items-center mt-2">

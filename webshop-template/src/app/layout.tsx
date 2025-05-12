@@ -38,7 +38,7 @@ export default function RootLayout({
         </header>
         <main>{children}</main>
         <footer className="p-4 bg-primary text-sm text-center text-gray-500">
-          <Footer />© 2025 Build by Jesse
+          <Footer />
         </footer>
       </body>
     </html>

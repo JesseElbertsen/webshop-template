@@ -4,37 +4,33 @@ import SaleItems from "./components/SaleItems";
 
 export default function Home() {
   return (
-    <section className="min-h-screen">
-      {/* Carousel op achtergrond met opacity */}
-      <div className="absolute inset-0 z-0">
-        <div className="w-full h-full brightness-50 md:flex hidden">
+    <section className="min-h-screen flex flex-col">
+      {/* Carousel met overlay content */}
+      <div className="relative w-full h-[500px]">
+        {/* Carousel */}
+        <div className="absolute inset-0 brightness-50 z-0">
           <Carousel carouselId="homepage" />
         </div>
-      </div>
 
-      {/* Overlay content */}
-      <div className="relative z-10">
-        <div className="flex md:flex-row flex-col items-center justify-between max-w-5xl mx-auto p-8 text-black pt-24">
-          {/* Titel linksonder */}
-          <h1 className="text-3xl md:text-5xl font-bold md:text-white">
+        {/* Overlay content */}
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white">
+          <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">
             Welkom op mijn site
           </h1>
-
-          {/* Rechterkant: lege container */}
-          <div className="md:h-24 bg-muted rounded-lg shadow-lg flex items-center justify-center flex-col p-4 mt-8 md:mt-0">
-            <p>Hier kan eventuele extra informatie</p>
-            <Link
-              className="bg-primary py-2 px-4 rounded-2xl text-white font-bold hover:bg-primary/80 transition-colors duration-300 mt-2"
-              href="/producten"
-            >
-              Producten
-            </Link>
-          </div>
+          <p className="mt-4 text-lg md:text-xl drop-shadow-lg">
+            Ontdek onze nieuwste aanbiedingen en producten!
+          </p>
+          <Link
+            href="/producten"
+            className="mt-6 bg-primary py-3 px-6 rounded-lg text-white font-bold hover:bg-primary/80 transition-colors duration-300"
+          >
+            Bekijk Producten
+          </Link>
         </div>
       </div>
 
       {/* SaleItems */}
-      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl mx-auto md:p-8 text-black pt-8 md:pt-24">
+      <div className="flex flex-col items-center justify-center w-full max-w-7xl mx-auto mt-12 px-4">
         <SaleItems />
       </div>
     </section>
