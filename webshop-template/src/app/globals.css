@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e6e5e5;
+  --background: #eeeeee;
   --foreground: #171717;
 }
 
 @theme {
-  --color-primary: #2563eb; /*Voor buttons, links en accentkleuren*/
-  --color-primary-light: #60a5fa; /*Voor hover-effecten en lichte accenten*/
-  --color-primary-dark: #1e40af; /*Voor actieve states, headers*/
+  --color-primary: #22a4b9; /* Voor buttons, links en accentkleuren */
+  --color-primary-light: #60a5fa; /* Voor hover-effecten en lichte accenten */
+  --color-primary-dark: #1e40af; /* Voor actieve states, headers */
   --color-secondary: #3b82f6; /* */
-  --color-muted: #e0f2fe; /* achtergrond voor cards of notificaties*/
+  --color-muted: #e0f2fe; /* Achtergrond voor cards of notificaties */
 }
 
 @theme inline {
@@ -31,4 +31,26 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom scrollbar voor de slider */
+.slider-scrollbar::-webkit-scrollbar {
+  height: 10px; /* Hoogte van de scrollbar */
+}
+
+.slider-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Achtergrond van de scrollbar-track */
+  border-radius: 10px; /* Afgeronde hoeken */
+  margin: 4px 10px; /* Ruimte tussen de scrollbar en de content */
+}
+
+.slider-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #22a4b9; /* Kleur van de scrollbar (bijvoorbeeld de kleur van je button) */
+  border-radius: 10px; /* Afgeronde hoeken */
+  border: 2px solid #f0f0f0; /* Ruimte tussen de scrollbar en de track */
+}
+
+.slider-scrollbar {
+  scrollbar-width: thin; /* Voor Firefox: dunne scrollbar */
+  scrollbar-color: #22a4b9 #f0f0f0; /* Voor Firefox: kleur van de scrollbar en track */
 }

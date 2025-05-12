@@ -1,23 +1,23 @@
-import { getDummyProducts } from "../../lib/api";
+import { getProducts } from "../../lib/api";
 import { notFound } from "next/navigation";
 import ProductDetails from "./ProductDetails";
-
-type Product = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-};
+import { Product } from "../../types/types";
 
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>; // Zorg ervoor dat params een Promise kan zijn
 }) {
-  const products: Product[] = await getDummyProducts();
-  const product: Product | undefined = products.find((p) => p.id === params.id);
+  // Wacht op de resolutie van params
+  const { id } = await params;
 
+  // Haal de producten op
+  const products: Product[] = await getProducts();
+
+  // Zoek het product met de juiste ID
+  const product: Product | undefined = products.find((p) => p.id === id);
+
+  // Controleer of het product bestaat
   if (!product) {
     notFound(); // Geeft een 404-pagina als het product niet bestaat
   }
