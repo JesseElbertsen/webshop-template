@@ -36,7 +36,7 @@ export default function ProductForm() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-    // Voor nu: afbeelding niet meesturen, alleen de andere velden
+    // Gebruik standaardafbeelding als er geen image is
     const payload = {
       title: form.title,
       description: form.description,
@@ -45,7 +45,7 @@ export default function ProductForm() {
       price: Number(form.price),
       oldPrice: form.oldPrice ? Number(form.oldPrice) : null,
       amount: Number(form.amount),
-      // image: imageUrl (later toevoegen)
+      image: form.image ? "UPLOAD_LATER" : "https://picsum.photos/600/400", // <-- standaardafbeelding
     };
     const res = await fetch("/api/products", {
       method: "POST",

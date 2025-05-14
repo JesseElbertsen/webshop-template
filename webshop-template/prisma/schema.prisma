@@ -19,7 +19,7 @@ model Product {
   description String
   info        String
   amount      Int
-  image       String
+  image       String? // <-- maak optioneel
   price       Float
   oldPrice    Float?
   type        String

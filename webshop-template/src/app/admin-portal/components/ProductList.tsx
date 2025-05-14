@@ -64,7 +64,13 @@ export default function ProductList() {
                           className="w-32 h-32 object-cover rounded"
                         />
                       ) : (
-                        <span>-</span>
+                        <Image
+                          width={1280}
+                          height={1280}
+                          src="https://picsum.photos/600/400"
+                          alt="Standaardafbeelding"
+                          className="w-32 h-32 object-cover rounded"
+                        />
                       )}
                     </td>
                     <td className="border px-2 py-1">{product.title}</td>
