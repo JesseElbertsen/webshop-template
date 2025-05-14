@@ -1,11 +1,11 @@
 export type Product = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   info: string;
   amount: number;
   image: string;
   price: number;
-  oldPrice?: number; // Optioneel, alleen aanwezig bij sale
+  oldPrice?: number;
   type: string;
 };

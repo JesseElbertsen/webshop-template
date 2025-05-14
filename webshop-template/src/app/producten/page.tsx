@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { getProducts } from "../lib/api";
 import Filter from "../components/Filter";
 import { Product } from "../types/types";
 
@@ -12,7 +11,8 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const data = await getProducts();
+      const res = await fetch("/api/products", { cache: "no-store" });
+      const data = await res.json();
       setProducts(data);
       setFilteredProducts(data);
     }

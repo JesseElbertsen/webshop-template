@@ -2,7 +2,7 @@ import { Product } from "../types/types";
 
 const products: Product[] = [
   {
-    id: "1",
+    id: 1,
     title: "Product A",
     description: "Beschrijving van product A",
     info: "Extra informatie over product A",
@@ -13,7 +13,7 @@ const products: Product[] = [
     type: "optie 1",
   },
   {
-    id: "2",
+    id: 2,
     title: "Product B",
     description: "Beschrijving van product B",
     info: "Extra informatie over product B",
@@ -23,7 +23,7 @@ const products: Product[] = [
     type: "optie 2",
   },
   {
-    id: "3",
+    id: 3,
     title: "Product C",
     description: "Beschrijving van product C",
     info: "Extra informatie over product C",
@@ -33,7 +33,7 @@ const products: Product[] = [
     type: "optie 3",
   },
   {
-    id: "4",
+    id: 4,
     title: "Product D",
     description: "Beschrijving van product D",
     info: "Extra informatie over product D",
@@ -44,7 +44,7 @@ const products: Product[] = [
     type: "optie 1",
   },
   {
-    id: "5",
+    id: 5,
     title: "Product E",
     description: "Beschrijving van product E",
     info: "Extra informatie over product E",
@@ -54,7 +54,7 @@ const products: Product[] = [
     type: "optie 2",
   },
   {
-    id: "6",
+    id: 6,
     title: "Product F",
     description: "Beschrijving van product F",
     info: "Extra informatie over product F",
@@ -64,7 +64,7 @@ const products: Product[] = [
     type: "optie 3",
   },
   {
-    id: "7",
+    id: 7,
     title: "Product G",
     description: "Beschrijving van product G",
     info: "Extra informatie over product G",
@@ -75,7 +75,7 @@ const products: Product[] = [
     type: "optie 1",
   },
   {
-    id: "8",
+    id: 8,
     title: "Product H",
     description: "Beschrijving van product H",
     info: "Extra informatie over product H",

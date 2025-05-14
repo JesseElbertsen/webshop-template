@@ -1,4 +1,3 @@
-import { getProducts } from "../../lib/api";
 import { notFound } from "next/navigation";
 import ProductDetails from "./ProductDetails";
 import { Product } from "../../types/types";
@@ -6,21 +5,14 @@ import { Product } from "../../types/types";
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>; // Zorg ervoor dat params een Promise kan zijn
+  params: { id: string };
 }) {
-  // Wacht op de resolutie van params
-  const { id } = await params;
-
-  // Haal de producten op
-  const products: Product[] = await getProducts();
-
-  // Zoek het product met de juiste ID
-  const product: Product | undefined = products.find((p) => p.id === id);
-
-  // Controleer of het product bestaat
-  if (!product) {
-    notFound(); // Geeft een 404-pagina als het product niet bestaat
-  }
+  const res = await fetch(`http://localhost:3000/api/products/${params.id}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) notFound();
+  const product: Product = await res.json();
+  if (!product) notFound();
 
   return <ProductDetails product={product} />;
 }

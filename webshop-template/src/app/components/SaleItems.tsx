@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { getProducts } from "../lib/api";
 import { Product } from "../types/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,10 +12,12 @@ export default function SaleItems() {
 
   useEffect(() => {
     async function fetchSaleProducts() {
-      const products = await getProducts();
-      // Sale: als oldPrice bestaat en hoger is dan price
+      const res = await fetch("/api/products", { cache: "no-store" });
+      const products = await res.json();
       const filtered = products.filter(
-        (product) => product.oldPrice && product.oldPrice > product.price
+        (product: Product) =>
+          typeof product.oldPrice === "number" &&
+          product.oldPrice > product.price
       );
       setSaleProducts(filtered);
     }
