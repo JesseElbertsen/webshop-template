@@ -55,7 +55,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
                       ? "Alle producten"
                       : option === "sale"
                       ? "Aanbiedingen"
-                      : `Type ${option.toUpperCase()}`}
+                      : ` ${option.toUpperCase()}`}
                   </button>
                 </li>
               ))}
@@ -82,7 +82,7 @@ export default function Filter({ options, onFilterChange }: FilterProps) {
                   ? "Alle producten"
                   : option === "sale"
                   ? "Aanbiedingen"
-                  : `Type ${option.toUpperCase()}`}
+                  : ` ${option.toUpperCase()}`}
               </button>
             </li>
           ))}

@@ -11,18 +11,15 @@ export default function ProductCard({
   price,
   amount,
   description,
-  sale,
+  oldPrice,
   index,
 }: Product & { index: number }) {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Bereken het kortingspercentage
-  const discountPercentage = sale
-    ? Math.round(((sale.oldPrice - sale.newPrice) / sale.oldPrice) * 100)
-    : null;
+  const discountPercentage =
+    oldPrice && oldPrice > price
+      ? Math.round(((oldPrice - price) / oldPrice) * 100)
+      : null;
 
   return (
     <motion.div
@@ -48,7 +45,7 @@ export default function ProductCard({
               className="rounded-md h-40 w-full object-cover"
             />
             {/* Kortingpercentage */}
-            {sale && discountPercentage && (
+            {discountPercentage && (
               <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md">
                 -{discountPercentage}%
               </div>
@@ -72,15 +69,15 @@ export default function ProductCard({
 
             {/* Prijzen */}
             <div className="mt-4 flex items-center justify-between">
-              {sale ? (
+              {oldPrice && oldPrice > price ? (
                 <div className="flex flex-col items-start">
                   {/* Nieuwe prijs (groen) */}
                   <p className="text-green-600 font-bold text-lg">
-                    €{sale.newPrice.toFixed(2)}
+                    €{price.toFixed(2)}
                   </p>
                   {/* Oude prijs (rood, doorstreept) */}
                   <p className="text-red-500 line-through text-sm">
-                    €{sale.oldPrice.toFixed(2)}
+                    €{oldPrice.toFixed(2)}
                   </p>
                 </div>
               ) : (
@@ -90,7 +87,7 @@ export default function ProductCard({
               )}
 
               {/* Badge voor afgeprijsd product */}
-              {sale && (
+              {oldPrice && oldPrice > price && (
                 <div className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
                   Afgeprijsd!
                 </div>

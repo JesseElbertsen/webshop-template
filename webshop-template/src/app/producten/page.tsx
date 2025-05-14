@@ -21,7 +21,13 @@ export default function Page() {
 
   const handleFilterChange = (type: string) => {
     if (type === "sale") {
-      setFilteredProducts(products.filter((product) => product.sale));
+      setFilteredProducts(
+        products.filter(
+          (product) =>
+            typeof product.oldPrice === "number" &&
+            product.oldPrice > product.price
+        )
+      );
     } else {
       setFilteredProducts(
         type === ""
