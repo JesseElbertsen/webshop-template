@@ -19,7 +19,7 @@ export default function SearchFunction({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="mb-4 p-2 border rounded w-full max-w-xs"
+      className="mb-4 p-2 border rounded w-full max-w-xs bg-white text-black"
     />
   );
 }

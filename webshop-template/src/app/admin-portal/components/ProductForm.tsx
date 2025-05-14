@@ -73,7 +73,7 @@ export default function ProductForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-4 rounded shadow max-w-xl w-full mb-8"
+      className="bg-white p-4 rounded shadow w-full   "
     >
       <h2 className="text-lg font-bold mb-4">Nieuw product toevoegen</h2>
       <div className="mb-2">

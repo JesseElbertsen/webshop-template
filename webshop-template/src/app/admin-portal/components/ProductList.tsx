@@ -24,20 +24,34 @@ export default function ProductList() {
   if (loading) return <div>Producten laden...</div>;
 
   return (
-    <div className="w-full max-w-7xl mt-8">
+    <div className="w-full bg-muted p-4 ">
       <h2 className="text-xl font-bold mb-4">Product Overzicht</h2>
       <SearchFunction value={search} onChange={setSearch} />
-      <div className="max-h-[1000px] overflow-y-auto rounded-lg border">
+      <div className="max-h-[700px] overflow-y-auto rounded-lg border">
         <table className="w-full">
           <thead>
             <tr>
-              <th className="border px-2 py-1 w-40">Afbeelding</th>
-              <th className="border px-2 py-1">Naam</th>
-              <th className="border px-2 py-1">Prijs</th>
-              <th className="border px-2 py-1">Type</th>
-              <th className="border px-2 py-1">Aantal</th>
-              <th className="border px-2 py-1">Aanbieding</th>
-              <th className="border px-2 py-1">Acties</th>
+              <th className="border px-2 py-1 w-40 sticky top-0 bg-muted z-10">
+                Afbeelding
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Naam
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Prijs
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Type
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Aantal
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Aanbieding
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Acties
+              </th>
             </tr>
           </thead>
           <tbody>
