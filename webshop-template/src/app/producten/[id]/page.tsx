@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import ProductDetails from "./ProductDetails";
+import { prisma } from "@/app/lib/prisma";
 import { Product } from "../../types/types";
 
 export default async function ProductPage({
@@ -7,12 +8,16 @@ export default async function ProductPage({
 }: {
   params: { id: string };
 }) {
-  const res = await fetch(`http://localhost:3000/api/products/${params.id}`, {
-    cache: "no-store",
+  const dbProduct = await prisma.product.findUnique({
+    where: { id: Number(params.id) },
   });
-  if (!res.ok) notFound();
-  const product: Product = await res.json();
-  if (!product) notFound();
+  if (!dbProduct) notFound();
+
+  // Zet oldPrice: null om naar undefined
+  const product: Product = {
+    ...dbProduct,
+    oldPrice: dbProduct.oldPrice === null ? undefined : dbProduct.oldPrice,
+  };
 
   return <ProductDetails product={product} />;
 }
