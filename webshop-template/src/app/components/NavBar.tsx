@@ -28,7 +28,7 @@ const Navbar = () => {
             <li key={index} className="group">
               <a
                 href={link.href}
-                className="hover:bg-primary-light transition px-6 py-2 bg-primary rounded-xl"
+                className="hover:bg-primary-light transition px-6 py-2 bg-primary rounded-full z-50"
               >
                 {link.name}
               </a>

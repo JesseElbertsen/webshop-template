@@ -49,7 +49,7 @@ export default function Page() {
       </div>
 
       {/* Product Cards */}
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-7xl">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4 md:mx-auto max-w-7xl">
         {filteredProducts.map((product, index) => (
           <ProductCard key={product.id} {...product} index={index} />
         ))}
