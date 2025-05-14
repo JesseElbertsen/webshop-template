@@ -6,14 +6,14 @@ import { Product } from "../../types/types";
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const { id } = await params;
   const dbProduct = await prisma.product.findUnique({
-    where: { id: Number(params.id) },
+    where: { id: Number(id) },
   });
   if (!dbProduct) notFound();
 
-  // Zet oldPrice: null om naar undefined
   const product: Product = {
     ...dbProduct,
     oldPrice: dbProduct.oldPrice === null ? undefined : dbProduct.oldPrice,
