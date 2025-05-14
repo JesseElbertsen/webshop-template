@@ -75,7 +75,7 @@ export default function SaleItems() {
                     <Image
                       width={500}
                       height={500}
-                      src={product.image}
+                      src={product.image || "https://picsum.photos/600/400"}
                       alt={product.title}
                       className="rounded-t-xl h-64 w-full object-cover"
                     />

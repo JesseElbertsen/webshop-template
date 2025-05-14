@@ -17,7 +17,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         {/* Productafbeelding */}
         <div className="flex justify-center">
           <Image
-            src={product.image}
+            src={product.image || "https://picsum.photos/600/400"}
             alt={product.title}
             width={1000}
             height={1000}
