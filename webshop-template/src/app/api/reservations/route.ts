@@ -4,7 +4,16 @@ import { NextResponse } from "next/server";
 // Haal alle reserveringen op
 export async function GET() {
   const reservations = await prisma.reservation.findMany({
-    include: { product: true },
+    include: {
+      product: {
+        select: {
+          title: true,
+          type: true,
+          price: true,
+          amount: true,
+        },
+      },
+    },
     orderBy: { createdAt: "desc" },
   });
   return NextResponse.json(reservations);

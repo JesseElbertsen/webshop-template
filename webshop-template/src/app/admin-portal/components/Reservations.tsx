@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 type Reservation = {
   id: string;
-  product?: { title?: string };
+  product?: { title?: string; type?: string; price?: number; amount?: number };
   productId?: string;
   name: string;
   email: string;
@@ -31,6 +31,15 @@ export default function Reservations() {
                 Product
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Type
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Prijs
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Nieuwe hoeveelheid
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
                 Naam
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
@@ -53,6 +62,11 @@ export default function Reservations() {
                 <td className="border px-2 py-1">
                   {r.product?.title || r.productId}
                 </td>
+                <td className="border px-2 py-1">{r.product?.type}</td>
+                <td className="border px-2 py-1">
+                  €{r.product?.price?.toFixed(2)}
+                </td>
+                <td className="border px-2 py-1">{r.product?.amount}</td>
                 <td className="border px-2 py-1">{r.name}</td>
                 <td className="border px-2 py-1">{r.email}</td>
                 <td className="border px-2 py-1">{r.phone}</td>

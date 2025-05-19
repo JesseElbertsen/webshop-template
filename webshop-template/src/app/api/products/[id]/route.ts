@@ -13,28 +13,26 @@ export async function GET(
   return NextResponse.json(product);
 }
 
-// Werk een product bij
-export async function PUT(
-  request: Request,
-  context: { params: Promise<{ id: string }> }
-) {
-  const { id } = await context.params;
-  const data = await request.json();
-  const product = await prisma.product.update({
-    where: { id: Number(id) },
-    data,
-  });
-  return NextResponse.json(product);
-}
-
 // Verwijder een product
 export async function DELETE(
   request: Request,
   context: { params: Promise<{ id: string }> }
 ) {
   const { id } = await context.params;
-  const product = await prisma.product.delete({
+  await prisma.product.delete({ where: { id: Number(id) } });
+  return NextResponse.json({ success: true });
+}
+
+// Update een product
+export async function PUT(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  const data = await request.json();
+  const updated = await prisma.product.update({
     where: { id: Number(id) },
+    data,
   });
-  return NextResponse.json(product);
+  return NextResponse.json(updated);
 }

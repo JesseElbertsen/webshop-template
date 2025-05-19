@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Product } from "../../types/types";
 import Image from "next/image";
 import SearchFunction from "@/app/components/SearchFunction";
+import EditProductModal from "./EditProductModal";
 
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [editProduct, setEditProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -20,6 +22,24 @@ export default function ProductList() {
     }
     fetchProducts();
   }, []);
+
+  // Verwijder product
+  async function handleDelete(id: number) {
+    if (!confirm("Weet je zeker dat je dit product wilt verwijderen?")) return;
+    await fetch(`/api/products/${id}`, { method: "DELETE" });
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+  }
+
+  // Bewerk product
+  async function handleEditSave(updated: Product) {
+    await fetch(`/api/products/${updated.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    });
+    setProducts((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+    setEditProduct(null);
+  }
 
   if (loading) return <div>Producten laden...</div>;
 
@@ -102,13 +122,13 @@ export default function ProductList() {
                       <div className="flex flex-col gap-2 items-center">
                         <button
                           className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-1 px-3 rounded w-32"
-                          // onClick={() => handleEdit(product)} // Voeg later je edit handler toe
+                          onClick={() => setEditProduct(product)}
                         >
                           Bewerken
                         </button>
                         <button
                           className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded w-32"
-                          // onClick={() => handleDelete(product.id)} // Voeg later je delete handler toe
+                          onClick={() => handleDelete(product.id)}
                         >
                           Verwijderen
                         </button>
@@ -120,6 +140,14 @@ export default function ProductList() {
           </tbody>
         </table>
       </div>
+      {/* Modal voor bewerken */}
+      {editProduct && (
+        <EditProductModal
+          product={editProduct}
+          onSave={handleEditSave}
+          onClose={() => setEditProduct(null)}
+        />
+      )}
     </div>
   );
 }
