@@ -9,7 +9,7 @@ export default function ProductCard({
   title,
   image,
   price,
-  amount,
+  // amount,
   description,
   oldPrice,
   index,
@@ -34,7 +34,7 @@ export default function ProductCard({
       }}
     >
       <Link href={`/producten/${id}`}>
-        <div className="shadow rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative">
+        <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[400px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
             <Image
@@ -53,13 +53,11 @@ export default function ProductCard({
           </div>
           <div className="p-4">
             {/* Titel en aantal */}
-            <div className="flex justify-between items-center mt-2">
-              <h2 className="text-lg font-semibold mt-2 p-2 text-black">
-                {title}
-              </h2>
-              <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
+            <div className="flex justify-between items-center ">
+              <h2 className="text-lg font-semibold p-2 text-black">{title}</h2>
+              {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
                 aantal: x {amount}
-              </p>
+              </p> */}
             </div>
 
             {/* Beschrijving */}

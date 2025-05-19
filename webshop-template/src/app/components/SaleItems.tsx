@@ -55,7 +55,7 @@ export default function SaleItems() {
         </button>
         <div
           ref={sliderRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory slider-scrollbar px-1 max-w-7xl mx-auto"
+          className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory slider-scrollbar px-1 max-w-7xl mx-auto pb-6"
         >
           {saleProducts.map((product) => {
             const discountPercentage = product.oldPrice
@@ -70,7 +70,7 @@ export default function SaleItems() {
                 className="snap-start flex-shrink-0"
                 style={{ width: "calc(100% - 2rem)", maxWidth: "300px" }}
               >
-                <div className="shadow rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative w-full">
+                <div className="shadow-xl rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative w-full">
                   <div className="relative">
                     <Image
                       width={500}
@@ -86,7 +86,7 @@ export default function SaleItems() {
                     )}
                   </div>
                   <div className="p-4">
-                    <h2 className="text-lg font-semibold mt-2 text-black text-center">
+                    <h2 className="text-lg font-semibold mt-2 text-black ">
                       {product.title}
                     </h2>
                     <div className="mt-4 flex items-center justify-between">

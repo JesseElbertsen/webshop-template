@@ -73,7 +73,7 @@ export default function ProductForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-4 rounded shadow w-full   "
+      className="bg-muted p-4 rounded shadow w-full   "
     >
       <h2 className="text-lg font-bold mb-4">Nieuw product toevoegen</h2>
       <div className="mb-2">
@@ -83,7 +83,7 @@ export default function ProductForm() {
           value={form.title}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -93,7 +93,7 @@ export default function ProductForm() {
           value={form.description}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -102,7 +102,7 @@ export default function ProductForm() {
           name="info"
           value={form.info}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -112,7 +112,7 @@ export default function ProductForm() {
           value={form.type}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -125,7 +125,7 @@ export default function ProductForm() {
           value={form.price}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -137,7 +137,7 @@ export default function ProductForm() {
           step="0.01"
           value={form.oldPrice}
           onChange={handleChange}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-2">
@@ -149,7 +149,7 @@ export default function ProductForm() {
           value={form.amount}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <div className="mb-4">
@@ -162,7 +162,7 @@ export default function ProductForm() {
               handleImageUpload(e.target.files[0]);
             }
           }}
-          className="border p-2 rounded w-full"
+          className="border p-2 rounded w-full bg-white"
         />
       </div>
       <button
