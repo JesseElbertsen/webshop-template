@@ -64,7 +64,7 @@ export default function ProductList() {
                 Type
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
-                Aantal
+                Aantal op voorraad
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
                 Aanbieding
