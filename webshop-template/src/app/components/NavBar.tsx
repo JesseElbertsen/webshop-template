@@ -28,12 +28,10 @@ const Navbar = () => {
             <li key={index} className="group">
               <a
                 href={link.href}
-                className="hover:bg-primary-light transition px-6 py-2 bg-primary rounded-full z-50"
+                className=" transition    z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full"
               >
                 {link.name}
               </a>
-              {/* Onderstreep-lijn animatie */}
-              <span className="absolute left-0 bottom-[-16px] h-[3px] w-full bg-gradient-to-r bg-primary-100 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </li>
           ))}
         </ul>
