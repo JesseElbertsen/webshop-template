@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { Product } from "../../types/types";
+import { useState } from "react";
+import ReservationModal from "./ReservationModal";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const discountPercentage =
@@ -10,6 +12,10 @@ export default function ProductDetails({ product }: { product: Product }) {
           ((product.oldPrice - product.price) / product.oldPrice) * 100
         )
       : null;
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const isOutOfStock = product.amount === 0;
 
   return (
     <div className="min-h-screen md:mt-8">
@@ -71,7 +77,23 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </p>
               </div>
             </div>
-            {/* ...rest van je reserveringslogica... */}
+            {isOutOfStock ? (
+              <div className="bg-red-100 text-red-700 px-4 py-2 rounded text-center font-semibold mt-4">
+                Dit product is momenteel niet op voorraad
+              </div>
+            ) : (
+              <button
+                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full mt-4"
+                onClick={() => setModalOpen(true)}
+              >
+                Dit product reserveren
+              </button>
+            )}
+            <ReservationModal
+              productId={product.id}
+              open={modalOpen}
+              onClose={() => setModalOpen(false)}
+            />
           </div>
         </div>
       </div>

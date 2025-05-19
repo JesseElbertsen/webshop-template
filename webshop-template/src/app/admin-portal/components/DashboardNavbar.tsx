@@ -29,7 +29,16 @@ export default function DashboardNavbar({
         `}
         onClick={() => setActive("add")}
       >
-        Nieuw product toevoegen
+        product toevoegen
+      </button>
+      <button
+        className={`text-left px-4 py-2 rounded transition font-semibold text-white
+          bg-primary hover:bg-primary-light
+          ${active === "reservations" ? "bg-primary-light" : ""}
+        `}
+        onClick={() => setActive("reservations")}
+      >
+        Reserveringen
       </button>
       {/* Voeg hier extra dashboard secties toe indien gewenst */}
     </nav>
