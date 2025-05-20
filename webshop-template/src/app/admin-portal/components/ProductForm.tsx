@@ -207,15 +207,6 @@ export default function ProductForm() {
           </tbody>
         </table>
       </div>
-      {form.image && (
-        <Image
-          width={1280}
-          height={1280}
-          src={form.image}
-          alt="Preview"
-          className="mt-2 rounded w-32 h-32 object-cover"
-        />
-      )}
     </form>
   );
 }
