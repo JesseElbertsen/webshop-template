@@ -4,8 +4,9 @@ export type Product = {
   description: string;
   info: string;
   amount: number;
-  image?: string | null; // <-- fix: optioneel en/of null
+  image?: string | null;
   price: number;
-  oldPrice?: number;
+  oldPrice?: number | null;
   type: string;
+  public_id?: string | null; // <-- voeg deze regel toe!
 };

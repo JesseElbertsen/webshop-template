@@ -21,13 +21,13 @@ export default function ProductDetails({ product }: { product: Product }) {
     <div className="min-h-screen md:mt-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
-        <div className="flex justify-center">
+        <div className=" w-full">
           <Image
             src={product.image || "https://picsum.photos/600/400"}
             alt={product.title}
-            width={1000}
-            height={1000}
-            className="rounded-md object-cover w-[500px] h-[500px]"
+            width={1500}
+            height={1500}
+            className="rounded-md object-cover w-[700px] h-[500px]"
           />
         </div>
 

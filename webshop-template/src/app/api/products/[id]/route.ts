@@ -13,13 +13,38 @@ export async function GET(
   return NextResponse.json(product);
 }
 
-// Verwijder een product
+// Verwijder een product (en afbeelding uit Cloudinary)
 export async function DELETE(
   request: Request,
   context: { params: Promise<{ id: string }> }
 ) {
   const { id } = await context.params;
+  // Haal het product op (voor public_id)
+  const product = await prisma.product.findUnique({
+    where: { id: Number(id) },
+  });
+
+  // Verwijder het product uit de database
   await prisma.product.delete({ where: { id: Number(id) } });
+
+  // Verwijder de afbeelding uit Cloudinary als public_id bestaat
+  if (product?.public_id) {
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    const apiKey = process.env.CLOUDINARY_API_KEY;
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+    const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString("base64");
+
+    await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${auth}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ public_id: product.public_id }),
+    });
+  }
+
   return NextResponse.json({ success: true });
 }
 
