@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Product } from "../types/types";
+import { TagIcon } from "@heroicons/react/24/outline";
 
 export default function ProductCard({
   id,
@@ -50,15 +51,17 @@ export default function ProductCard({
             />
             {/* Kortingpercentage */}
             {discountPercentage && (
-              <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md">
-                -{discountPercentage}%
+              <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
+                <TagIcon className="w-4 h-4" />-{discountPercentage}%
               </div>
             )}
           </div>
           <div className="p-4">
             {/* Titel en aantal */}
             <div className="flex justify-between items-center ">
-              <h2 className="text-lg font-semibold p-2 text-black">{title}</h2>
+              <h2 className="text-lg font-semibold p-2 text-black break-words line-clamp-2">
+                {title}
+              </h2>
               {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
                 aantal: x {amount}
               </p> */}

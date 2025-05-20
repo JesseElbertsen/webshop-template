@@ -4,6 +4,13 @@ import Image from "next/image";
 import { Product } from "../../types/types";
 import { useState } from "react";
 import ReservationModal from "./ReservationModal";
+import {
+  TagIcon,
+  CubeIcon,
+  DocumentTextIcon,
+  InformationCircleIcon,
+  BookmarkIcon,
+} from "@heroicons/react/24/outline";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const discountPercentage =
@@ -37,17 +44,23 @@ export default function ProductDetails({ product }: { product: Product }) {
             <h1 className="text-3xl font-bold text-black flex items-center gap-2 justify-between">
               {product.title}
               {discountPercentage && (
-                <span className="bg-red-500 text-white font-bold px-2 py-1 rounded-md">
-                  -{discountPercentage}%
+                <span className="bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
+                  <TagIcon className="w-5 h-5" />-{discountPercentage}%
                 </span>
               )}
             </h1>
             <div className="mt-4 bg-white p-4 rounded-md shadow-md">
-              <h2 className="mb-2">Beschrijving:</h2>
+              <h2 className="mb-2 flex items-center gap-2">
+                <DocumentTextIcon className="w-5 h-5 text-primary" />
+                Beschrijving:
+              </h2>
               <p>{product.description}</p>
             </div>
             <div className="mt-4 bg-white p-4 rounded-md shadow-md">
-              <h2 className="mb-2">Product Informatie:</h2>
+              <h2 className="mb-2 flex items-center gap-2">
+                <InformationCircleIcon className="w-5 h-5 text-primary" />
+                Product Informatie:
+              </h2>
               <p>{product.info}</p>
             </div>
           </div>
@@ -58,21 +71,22 @@ export default function ProductDetails({ product }: { product: Product }) {
               {product.oldPrice && product.oldPrice > product.price ? (
                 <div className="flex flex-col">
                   {/* Nieuwe prijs (groen) */}
-                  <p className="text-green-600 font-bold text-2xl">
+                  <p className="text-green-600 font-bold text-2xl flex items-center gap-1">
                     €{product.price.toFixed(2)}
                   </p>
                   {/* Oude prijs (rood, doorstreept) */}
-                  <p className="text-red-500 line-through text-lg">
+                  <p className="text-red-500 line-through text-lg flex items-center gap-1">
                     €{product.oldPrice.toFixed(2)}
                   </p>
                 </div>
               ) : (
-                <p className="text-green-600 font-bold text-2xl">
+                <p className="text-green-600 font-bold text-2xl flex items-center gap-1">
                   €{product.price.toFixed(2)}
                 </p>
               )}
               <div>
-                <p className="inline-block bg-gray-400 text-white px-4 py-2 rounded-md">
+                <p className=" bg-gray-400 text-white px-4 py-2 rounded-md flex items-center gap-1">
+                  <CubeIcon className="w-5 h-5" />
                   aantal: x {product.amount}
                 </p>
               </div>
@@ -83,9 +97,10 @@ export default function ProductDetails({ product }: { product: Product }) {
               </div>
             ) : (
               <button
-                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full mt-4"
+                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full mt-4 flex items-center justify-center gap-2"
                 onClick={() => setModalOpen(true)}
               >
+                <BookmarkIcon className="w-5 h-5" />
                 Dit product reserveren
               </button>
             )}

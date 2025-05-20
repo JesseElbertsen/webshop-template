@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 interface SearchFunctionProps {
   value: string;
@@ -14,12 +15,15 @@ export default function SearchFunction({
   placeholder = "Zoek op naam...",
 }: SearchFunctionProps) {
   return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      className="mb-4 p-2 border rounded w-full max-w-xs bg-white text-black"
-    />
+    <div className="relative w-full max-w-xs mb-4">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="p-2 pl-10 border rounded w-full bg-white text-black"
+      />
+      <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+    </div>
   );
 }

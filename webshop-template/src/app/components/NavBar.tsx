@@ -1,6 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3BottomRightIcon,
+  XMarkIcon,
+  HomeIcon,
+  InformationCircleIcon,
+  ShoppingBagIcon,
+  EnvelopeIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -10,27 +18,30 @@ const Navbar = () => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
-  // Nav items met hun href
+  // Nav items met hun href en icon
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Over ons", href: "/over-ons" },
-    { name: "producten", href: "/producten" },
-    { name: "Contact", href: "/contact" },
+    { name: "Home", href: "/", icon: HomeIcon },
+    { name: "Over ons", href: "/over-ons", icon: InformationCircleIcon },
+    { name: "producten", href: "/producten", icon: ShoppingBagIcon },
+    { name: "Contact", href: "/contact", icon: EnvelopeIcon },
   ];
 
   return (
     <nav className="relative top-0 w-full z-50 shadow-xl text-xl">
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-between items-center bg-muted h-[6rem] backdrop-blur-md text-white py-4 px-10 relative">
-        <div className="text-2xl text-black z-50">logo hier</div>
+        <Link href="/" className="text-2xl text-black z-50">
+          logo hier
+        </Link>
         <ul className="flex space-x-10">
           {navLinks.map((link, index) => (
-            <li key={index} className="group">
+            <li key={index} className="group flex items-center gap-2">
               <a
                 href={link.href}
-                className=" transition    z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full"
+                className="transition z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full flex items-center gap-2"
               >
                 {link.name}
+                <link.icon className="w-6 h-6 " />
               </a>
             </li>
           ))}
@@ -42,7 +53,7 @@ const Navbar = () => {
         {/* Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="absolute top-6 right-8 z-50" // Zorg voor een hoge z-index
+          className="absolute top-6 right-8 z-50"
         >
           {open ? (
             <XMarkIcon className="w-10 h-10 text-black" />
@@ -62,13 +73,14 @@ const Navbar = () => {
             style={{ opacity: open ? 1 : 0 }}
           >
             {navLinks.map((link, index) => (
-              <li key={index}>
+              <li key={index} className="flex items-center gap-4">
                 <a
                   href={link.href}
-                  className="hover:text-primary-100 transition"
+                  className="hover:text-primary-100 transition flex items-center gap-4"
                   onClick={() => setOpen(false)}
                 >
                   {link.name}
+                  <link.icon className="w-10 h-10" />
                 </a>
               </li>
             ))}

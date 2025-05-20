@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { FunnelIcon as FunnelIconSolid } from "@heroicons/react/24/solid";
+
 import SearchFunction from "./SearchFunction";
 
 type FilterProps = {
@@ -27,7 +29,10 @@ export default function Filter({
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-2">Filter</h2>
+      <h2 className="text-xl font-bold mb-2 flex items-center gap-2">
+        Filter
+        <FunnelIconSolid className="w-6 h-6 text-primary" />
+      </h2>
       <SearchFunction
         value={searchValue}
         onChange={onSearchChange}
@@ -58,14 +63,14 @@ export default function Filter({
       </div>
 
       <div className="mt-6">
-        <span className="font-semibold">Filter op type</span>
+        <span className="font-semibold">Filter op product type</span>
         <div className="relative mt-2">
           <button
             className="px-4 py-2 rounded-md bg-primary text-white w-full text-left"
             onClick={() => setShowDropdown((v) => !v)}
             type="button"
           >
-            Types
+            Product Type
           </button>
           {showDropdown && (
             <ul className="absolute left-0 right-0 bg-white border rounded shadow z-10 mt-1">
@@ -79,7 +84,7 @@ export default function Filter({
                     }`}
                     onClick={() => handleOptionChange(option)}
                   >
-                    {option.toUpperCase()}
+                    {option}
                   </button>
                 </li>
               ))}

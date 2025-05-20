@@ -4,7 +4,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { Product } from "../types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  TagIcon,
+} from "@heroicons/react/24/outline";
 
 export default function SaleItems() {
   const [saleProducts, setSaleProducts] = useState<Product[]>([]);
@@ -80,8 +84,8 @@ export default function SaleItems() {
                       className="rounded-t-xl h-64 w-full object-cover"
                     />
                     {discountPercentage && (
-                      <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md">
-                        -{discountPercentage}%
+                      <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
+                        <TagIcon className="w-4 h-4" />-{discountPercentage}%
                       </div>
                     )}
                   </div>
