@@ -40,7 +40,11 @@ export default function ProductCard({
             <Image
               width={300}
               height={300}
-              src={image || "https://picsum.photos/600/400"}
+              src={
+                image && (image.startsWith("http") || image.startsWith("/"))
+                  ? image
+                  : "https://picsum.photos/600/400"
+              }
               alt={title}
               className="rounded-md h-40 w-full object-cover"
             />

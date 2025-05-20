@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 export default function ProductForm() {
   const [form, setForm] = useState({
@@ -11,15 +12,25 @@ export default function ProductForm() {
     price: "",
     oldPrice: "",
     amount: "",
-    image: null as File | null,
+    image: "", // <-- altijd een string!
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // Placeholder voor upload functie
-  const handleImageUpload = (file: File) => {
-    // Hier kun je later upload naar S3/Cloudinary/etc. doen
-    setForm((prev) => ({ ...prev, image: file }));
+  const handleImageUpload = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const data = await res.json();
+    if (data.url) {
+      setForm((prev) => ({ ...prev, image: data.url }));
+    } else {
+      alert("Uploaden mislukt");
+    }
   };
 
   const handleChange = (
@@ -36,16 +47,13 @@ export default function ProductForm() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-    // Gebruik standaardafbeelding als er geen image is
+    // Zet getallen om naar numbers!
     const payload = {
-      title: form.title,
-      description: form.description,
-      info: form.info,
-      type: form.type,
+      ...form,
       price: Number(form.price),
       oldPrice: form.oldPrice ? Number(form.oldPrice) : null,
       amount: Number(form.amount),
-      image: form.image ? "UPLOAD_LATER" : "https://picsum.photos/600/400", // <-- standaardafbeelding
+      image: form.image, // <-- GEEN fallback meer!
     };
     const res = await fetch("/api/products", {
       method: "POST",
@@ -62,7 +70,7 @@ export default function ProductForm() {
         price: "",
         oldPrice: "",
         amount: "",
-        image: null,
+        image: "",
       });
     } else {
       setMessage("Fout bij toevoegen product.");
@@ -167,12 +175,47 @@ export default function ProductForm() {
       </div>
       <button
         type="submit"
-        disabled={loading}
+        disabled={loading || !form.image}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
         {loading ? "Toevoegen..." : "Toevoegen"}
       </button>
       {message && <div className="mt-2">{message}</div>}
+      <div className="border-t mt-4 pt-4">
+        <h3 className="text-lg font-bold mb-2">Voorbeeldweergave</h3>
+        <table className="w-full">
+          <tbody>
+            <tr>
+              <td className="border px-2 py-1 w-40 h-40">
+                {form.image &&
+                (form.image.startsWith("http") ||
+                  form.image.startsWith("/")) ? (
+                  <Image
+                    width={1280}
+                    height={1280}
+                    src={form.image}
+                    alt={form.title}
+                    className="w-32 h-32 object-cover rounded"
+                  />
+                ) : (
+                  <div className="w-32 h-32 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                    Geen afbeelding
+                  </div>
+                )}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      {form.image && (
+        <Image
+          width={1280}
+          height={1280}
+          src={form.image}
+          alt="Preview"
+          className="mt-2 rounded w-32 h-32 object-cover"
+        />
+      )}
     </form>
   );
 }

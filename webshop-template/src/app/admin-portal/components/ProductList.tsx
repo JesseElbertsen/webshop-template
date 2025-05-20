@@ -89,23 +89,19 @@ export default function ProductList() {
                     className={idx % 2 === 0 ? "bg-white" : "bg-gray-200"}
                   >
                     <td className="border px-2 py-1 w-40 h-40">
-                      {product.image ? (
-                        <Image
-                          width={1280}
-                          height={1280}
-                          src={product.image}
-                          alt={product.title}
-                          className="w-32 h-32 object-cover rounded"
-                        />
-                      ) : (
-                        <Image
-                          width={1280}
-                          height={1280}
-                          src="https://picsum.photos/600/400"
-                          alt="Standaardafbeelding"
-                          className="w-32 h-32 object-cover rounded"
-                        />
-                      )}
+                      <Image
+                        width={1280}
+                        height={1280}
+                        src={
+                          product.image &&
+                          (product.image.startsWith("http") ||
+                            product.image.startsWith("/"))
+                            ? product.image
+                            : "https://picsum.photos/600/400"
+                        }
+                        alt={product.title}
+                        className="w-32 h-32 object-cover rounded"
+                      />
                     </td>
                     <td className="border px-2 py-1">{product.title}</td>
                     <td className="border px-2 py-1">€{product.price}</td>
