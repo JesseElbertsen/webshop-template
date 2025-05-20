@@ -1,93 +1,92 @@
 "use client";
 
 import { useState } from "react";
+import SearchFunction from "./SearchFunction";
 
 type FilterProps = {
   options: string[];
   onFilterChange: (filteredOption: string) => void;
+  searchValue: string;
+  onSearchChange: (value: string) => void;
 };
 
-export default function Filter({ options, onFilterChange }: FilterProps) {
+export default function Filter({
+  options,
+  onFilterChange,
+  searchValue,
+  onSearchChange,
+}: FilterProps) {
   const [activeOption, setActiveOption] = useState<string>("");
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); // Houdt bij of het menu open is
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   const handleOptionChange = (option: string) => {
     setActiveOption(option);
     onFilterChange(option);
-    setIsMenuOpen(false); // Sluit het menu na selectie
+    setShowDropdown(false);
   };
 
   return (
     <div>
-      {/* Knop om het filtermenu te openen */}
-      <button
-        className="bg-primary text-white px-4 py-2 rounded-md w-full md:hidden"
-        onClick={() => setIsMenuOpen(true)}
-      >
-        Filter opties
-      </button>
+      <h2 className="text-xl font-bold mb-2">Filter</h2>
+      <SearchFunction
+        value={searchValue}
+        onChange={onSearchChange}
+        placeholder="Zoek op naam..."
+      />
 
-      {/* Filtermenu (mobiel) */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 max-w-md">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">Filter op type</h2>
-              <button
-                className="text-gray-500 hover:text-gray-700"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
-            <ul className="space-y-2">
-              {["", "sale", ...options].map((option) => (
+      <div className="flex flex-col gap-2 mt-4">
+        <button
+          className={`px-4 py-2 rounded-md ${
+            activeOption === ""
+              ? "bg-primary-light text-white"
+              : "bg-primary text-white"
+          }`}
+          onClick={() => handleOptionChange("")}
+        >
+          Alle producten
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${
+            activeOption === "sale"
+              ? "bg-primary-light text-white"
+              : "bg-primary text-white"
+          }`}
+          onClick={() => handleOptionChange("sale")}
+        >
+          Aanbiedingen
+        </button>
+      </div>
+
+      <div className="mt-6">
+        <span className="font-semibold">Filter op type</span>
+        <div className="relative mt-2">
+          <button
+            className="px-4 py-2 rounded-md bg-primary text-white w-full text-left"
+            onClick={() => setShowDropdown((v) => !v)}
+            type="button"
+          >
+            Types
+          </button>
+          {showDropdown && (
+            <ul className="absolute left-0 right-0 bg-white border rounded shadow z-10 mt-1">
+              {options.map((option) => (
                 <li key={option}>
                   <button
-                    className={`w-full text-left px-4 py-2 rounded-md ${
+                    className={`w-full text-left px-4 py-2 hover:bg-primary-light hover:text-white ${
                       activeOption === option
                         ? "bg-primary-light text-white"
-                        : "bg-primary text-white"
+                        : ""
                     }`}
                     onClick={() => handleOptionChange(option)}
                   >
-                    {option === ""
-                      ? "Alle producten"
-                      : option === "sale"
-                      ? "Aanbiedingen"
-                      : ` ${option.toUpperCase()}`}
+                    {option.toUpperCase()}
                   </button>
                 </li>
               ))}
             </ul>
-          </div>
+          )}
         </div>
-      )}
-
-      {/* Filtermenu (desktop) */}
-      <aside className="hidden md:block ">
-        <h2 className="text-xl font-bold mb-4">Filter op type</h2>
-        <ul className="space-y-2">
-          {["", "sale", ...options].map((option) => (
-            <li key={option}>
-              <button
-                className={`w-full text-left px-4 py-2 rounded-md ${
-                  activeOption === option
-                    ? "bg-primary-light text-white"
-                    : "bg-primary text-white"
-                }`}
-                onClick={() => handleOptionChange(option)}
-              >
-                {option === ""
-                  ? "Alle producten"
-                  : option === "sale"
-                  ? "Aanbiedingen"
-                  : ` ${option.toUpperCase()}`}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </aside>
+      </div>
     </div>
   );
 }
