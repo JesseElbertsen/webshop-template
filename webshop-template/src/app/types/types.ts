@@ -1,14 +1,12 @@
-export interface Product {
-  id: string;
+export type Product = {
+  id: number;
   title: string;
   description: string;
   info: string;
   amount: number;
-  image: string;
+  image?: string | null;
   price: number;
+  oldPrice?: number | null;
   type: string;
-  sale?: {
-    oldPrice: number;
-    newPrice: number;
-  };
-}
+  public_id?: string | null; // <-- voeg deze regel toe!
+};

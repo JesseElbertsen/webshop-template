@@ -10,7 +10,7 @@
   --color-primary-light: #60a5fa; /* Voor hover-effecten en lichte accenten */
   --color-primary-dark: #1e40af; /* Voor actieve states, headers */
   --color-secondary: #3b82f6; /* */
-  --color-muted: #e0f2fe; /* Achtergrond voor cards of notificaties */
+  --color-muted: #cbd5e1; /* Achtergrond voor cards of notificaties, nu iets donkerder */
 }
 
 @theme inline {

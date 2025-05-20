@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { getProducts } from "../lib/api";
 import Filter from "../components/Filter";
 import { Product } from "../types/types";
 
@@ -12,7 +11,8 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const data = await getProducts();
+      const res = await fetch("/api/products", { cache: "no-store" });
+      const data = await res.json();
       setProducts(data);
       setFilteredProducts(data);
     }
@@ -21,7 +21,13 @@ export default function Page() {
 
   const handleFilterChange = (type: string) => {
     if (type === "sale") {
-      setFilteredProducts(products.filter((product) => product.sale));
+      setFilteredProducts(
+        products.filter(
+          (product) =>
+            typeof product.oldPrice === "number" &&
+            product.oldPrice > product.price
+        )
+      );
     } else {
       setFilteredProducts(
         type === ""
@@ -43,7 +49,7 @@ export default function Page() {
       </div>
 
       {/* Product Cards */}
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto max-w-7xl">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4 md:mx-auto max-w-7xl">
         {filteredProducts.map((product, index) => (
           <ProductCard key={product.id} {...product} index={index} />
         ))}

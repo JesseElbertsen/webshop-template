@@ -1,51 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { Product } from "../../types/types";
+import { useState } from "react";
+import ReservationModal from "./ReservationModal";
 
 export default function ProductDetails({ product }: { product: Product }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const discountPercentage =
+    product.oldPrice && product.oldPrice > product.price
+      ? Math.round(
+          ((product.oldPrice - product.price) / product.oldPrice) * 100
+        )
+      : null;
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-  });
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Reservering opgeslagen:", formData);
-    alert("Reservering succesvol opgeslagen!");
-    setIsModalOpen(false);
-  };
-
-  // Bereken het kortingspercentage
-  const discountPercentage = product.sale
-    ? Math.round(
-        ((product.sale.oldPrice - product.sale.newPrice) /
-          product.sale.oldPrice) *
-          100
-      )
-    : null;
+  const isOutOfStock = product.amount === 0;
 
   return (
     <div className="min-h-screen md:mt-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
-        <div className="flex justify-center">
+        <div className=" w-full">
           <Image
-            src={product.image}
+            src={product.image || "https://picsum.photos/600/400"}
             alt={product.title}
-            width={1000}
-            height={1000}
-            className="rounded-md object-cover w-[500px] h-[500px]"
+            width={1500}
+            height={1500}
+            className="rounded-md object-cover w-[700px] h-[500px]"
           />
         </div>
 
@@ -73,15 +55,15 @@ export default function ProductDetails({ product }: { product: Product }) {
           {/* Acties */}
           <div className="mt-8">
             <div className="flex items-center justify-between p-4">
-              {product.sale ? (
+              {product.oldPrice && product.oldPrice > product.price ? (
                 <div className="flex flex-col">
                   {/* Nieuwe prijs (groen) */}
                   <p className="text-green-600 font-bold text-2xl">
-                    €{product.sale.newPrice.toFixed(2)}
+                    €{product.price.toFixed(2)}
                   </p>
                   {/* Oude prijs (rood, doorstreept) */}
                   <p className="text-red-500 line-through text-lg">
-                    €{product.sale.oldPrice.toFixed(2)}
+                    €{product.oldPrice.toFixed(2)}
                   </p>
                 </div>
               ) : (
@@ -95,93 +77,26 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </p>
               </div>
             </div>
-            <button
-              className="w-full bg-primary hover:bg-primary-light text-white py-3 rounded-md text-lg font-semibold transition"
-              onClick={() => setIsModalOpen(true)}
-            >
-              Reserveer dit product
-            </button>
+            {isOutOfStock ? (
+              <div className="bg-red-100 text-red-700 px-4 py-2 rounded text-center font-semibold mt-4">
+                Dit product is momenteel niet op voorraad
+              </div>
+            ) : (
+              <button
+                className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full mt-4"
+                onClick={() => setModalOpen(true)}
+              >
+                Dit product reserveren
+              </button>
+            )}
+            <ReservationModal
+              productId={product.id}
+              open={modalOpen}
+              onClose={() => setModalOpen(false)}
+            />
           </div>
         </div>
       </div>
-
-      {/* Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">Reserveer dit product</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Voornaam
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Achternaam
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  E-mailadres
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Telefoonnummer
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  className="mr-4 bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  Annuleren
-                </button>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
-                >
-                  Bevestigen
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

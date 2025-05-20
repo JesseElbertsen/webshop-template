@@ -9,20 +9,17 @@ export default function ProductCard({
   title,
   image,
   price,
-  amount,
+  // amount,
   description,
-  sale,
+  oldPrice,
   index,
 }: Product & { index: number }) {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  // Bereken het kortingspercentage
-  const discountPercentage = sale
-    ? Math.round(((sale.oldPrice - sale.newPrice) / sale.oldPrice) * 100)
-    : null;
+  const discountPercentage =
+    oldPrice && oldPrice > price
+      ? Math.round(((oldPrice - price) / oldPrice) * 100)
+      : null;
 
   return (
     <motion.div
@@ -37,18 +34,22 @@ export default function ProductCard({
       }}
     >
       <Link href={`/producten/${id}`}>
-        <div className="shadow rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative">
+        <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[400px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
             <Image
               width={300}
               height={300}
-              src={image}
+              src={
+                image && (image.startsWith("http") || image.startsWith("/"))
+                  ? image
+                  : "https://picsum.photos/600/400"
+              }
               alt={title}
               className="rounded-md h-40 w-full object-cover"
             />
             {/* Kortingpercentage */}
-            {sale && discountPercentage && (
+            {discountPercentage && (
               <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md">
                 -{discountPercentage}%
               </div>
@@ -56,13 +57,11 @@ export default function ProductCard({
           </div>
           <div className="p-4">
             {/* Titel en aantal */}
-            <div className="flex justify-between items-center mt-2">
-              <h2 className="text-lg font-semibold mt-2 p-2 text-black">
-                {title}
-              </h2>
-              <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
+            <div className="flex justify-between items-center ">
+              <h2 className="text-lg font-semibold p-2 text-black">{title}</h2>
+              {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
                 aantal: x {amount}
-              </p>
+              </p> */}
             </div>
 
             {/* Beschrijving */}
@@ -72,15 +71,15 @@ export default function ProductCard({
 
             {/* Prijzen */}
             <div className="mt-4 flex items-center justify-between">
-              {sale ? (
+              {oldPrice && oldPrice > price ? (
                 <div className="flex flex-col items-start">
                   {/* Nieuwe prijs (groen) */}
                   <p className="text-green-600 font-bold text-lg">
-                    €{sale.newPrice.toFixed(2)}
+                    €{price.toFixed(2)}
                   </p>
                   {/* Oude prijs (rood, doorstreept) */}
                   <p className="text-red-500 line-through text-sm">
-                    €{sale.oldPrice.toFixed(2)}
+                    €{oldPrice.toFixed(2)}
                   </p>
                 </div>
               ) : (
@@ -90,7 +89,7 @@ export default function ProductCard({
               )}
 
               {/* Badge voor afgeprijsd product */}
-              {sale && (
+              {oldPrice && oldPrice > price && (
                 <div className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
                   Afgeprijsd!
                 </div>

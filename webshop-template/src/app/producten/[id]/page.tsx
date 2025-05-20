@@ -1,26 +1,23 @@
-import { getProducts } from "../../lib/api";
 import { notFound } from "next/navigation";
 import ProductDetails from "./ProductDetails";
+import { prisma } from "@/app/lib/prisma";
 import { Product } from "../../types/types";
 
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ id: string }>; // Zorg ervoor dat params een Promise kan zijn
+  params: Promise<{ id: string }>;
 }) {
-  // Wacht op de resolutie van params
   const { id } = await params;
+  const dbProduct = await prisma.product.findUnique({
+    where: { id: Number(id) },
+  });
+  if (!dbProduct) notFound();
 
-  // Haal de producten op
-  const products: Product[] = await getProducts();
-
-  // Zoek het product met de juiste ID
-  const product: Product | undefined = products.find((p) => p.id === id);
-
-  // Controleer of het product bestaat
-  if (!product) {
-    notFound(); // Geeft een 404-pagina als het product niet bestaat
-  }
+  const product: Product = {
+    ...dbProduct,
+    oldPrice: dbProduct.oldPrice === null ? undefined : dbProduct.oldPrice,
+  };
 
   return <ProductDetails product={product} />;
 }
