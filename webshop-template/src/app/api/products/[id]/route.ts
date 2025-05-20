@@ -35,14 +35,17 @@ export async function DELETE(
 
     const auth = Buffer.from(`${apiKey}:${apiSecret}`).toString("base64");
 
-    await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${auth}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ public_id: product.public_id }),
-    });
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/resources/image/upload?public_ids[]=${product.public_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Basic ${auth}`,
+        },
+      }
+    );
+    const json = await res.json();
+    console.log("Cloudinary delete response:", json);
   }
 
   return NextResponse.json({ success: true });
