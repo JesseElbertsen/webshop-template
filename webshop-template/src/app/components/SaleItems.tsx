@@ -5,6 +5,7 @@ import { Product } from "../types/types";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  PhotoIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   TagIcon,
@@ -76,13 +77,21 @@ export default function SaleItems() {
               >
                 <div className="shadow-xl rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative w-full">
                   <div className="relative">
-                    <Image
-                      width={500}
-                      height={500}
-                      src={product.image || "https://picsum.photos/600/400"}
-                      alt={product.title}
-                      className="rounded-t-xl h-64 w-full object-cover"
-                    />
+                    {product.image &&
+                    (product.image.startsWith("http") ||
+                      product.image.startsWith("/")) ? (
+                      <Image
+                        width={500}
+                        height={500}
+                        src={product.image}
+                        alt={product.title}
+                        className="rounded-t-xl h-64 w-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-64 bg-gray-200 rounded-t-xl flex items-center justify-center text-gray-400">
+                        <PhotoIcon className="w-16 h-16" />
+                      </div>
+                    )}
                     {discountPercentage && (
                       <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
                         <TagIcon className="w-4 h-4" />-{discountPercentage}%

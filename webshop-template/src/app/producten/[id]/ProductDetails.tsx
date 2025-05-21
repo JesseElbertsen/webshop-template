@@ -5,6 +5,7 @@ import { Product } from "../../types/types";
 import { useState } from "react";
 import ReservationModal from "./ReservationModal";
 import {
+  PhotoIcon,
   TagIcon,
   CubeIcon,
   DocumentTextIcon,
@@ -28,14 +29,24 @@ export default function ProductDetails({ product }: { product: Product }) {
     <div className="min-h-screen md:mt-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
-        <div className=" w-full">
-          <Image
-            src={product.image || "https://picsum.photos/600/400"}
-            alt={product.title}
-            width={1500}
-            height={1500}
-            className="rounded-md object-cover w-[700px] h-[500px]"
-          />
+        <div className="w-full">
+          <div className="relative">
+            {product.image &&
+            (product.image.startsWith("http") ||
+              product.image.startsWith("/")) ? (
+              <Image
+                src={product.image}
+                alt={product.title}
+                width={1500}
+                height={1500}
+                className="rounded-md object-cover w-[700px] h-[500px]"
+              />
+            ) : (
+              <div className="w-[600px] h-[500px] bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
+                <PhotoIcon className="w-24 h-24" />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Productinformatie */}

@@ -22,12 +22,12 @@ model Product {
   price       Float
   oldPrice    Float?
   amount      Int
-  image       String
-  public_id   String?   // <-- Voeg deze regel toe!
+  image       String?
+  public_id   String?   
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
-  reservations Reservation[] // <-- voeg deze regel toe
+  reservations Reservation[] 
 }
 
 model Reservation {

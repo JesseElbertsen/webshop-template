@@ -13,12 +13,20 @@ type Reservation = {
 
 export default function Reservations() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/reservations")
       .then((res) => res.json())
       .then(setReservations);
   }, []);
+
+  // Verwijder reservering na bevestiging
+  async function handleDelete(id: string) {
+    setConfirmId(null);
+    await fetch(`/api/reservations/${id}`, { method: "DELETE" });
+    setReservations((prev) => prev.filter((r) => r.id !== id));
+  }
 
   return (
     <div className="w-full bg-muted p-4">
@@ -51,6 +59,9 @@ export default function Reservations() {
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
                 Datum
               </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Actie
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -73,11 +84,44 @@ export default function Reservations() {
                 <td className="border px-2 py-1">
                   {new Date(r.createdAt).toLocaleString()}
                 </td>
+                <td className="border px-2 py-1">
+                  <button
+                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
+                    onClick={() => setConfirmId(r.id)}
+                  >
+                    Afgehandeld
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {/* Popup voor bevestigen */}
+      {confirmId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+            <p className="mb-4 text-center">
+              Bevestig hiermee dat de klant het product heeft opgehaald.
+            </p>
+            <div className="flex gap-4">
+              <button
+                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                onClick={() => handleDelete(confirmId)}
+              >
+                Ja, reservering afronden
+              </button>
+              <button
+                className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+                onClick={() => setConfirmId(null)}
+              >
+                Annuleren
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

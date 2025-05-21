@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 
 export default function ProductForm() {
   const [form, setForm] = useState({
@@ -15,9 +16,12 @@ export default function ProductForm() {
     image: "",
   });
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState("");
+  const [showNoImageWarning, setShowNoImageWarning] = useState(false);
 
   const handleImageUpload = async (file: File) => {
+    setUploading(true);
     const formData = new FormData();
     formData.append("file", file);
 
@@ -31,6 +35,7 @@ export default function ProductForm() {
     } else {
       alert("Uploaden mislukt");
     }
+    setUploading(false);
   };
 
   const handleChange = (
@@ -43,17 +48,34 @@ export default function ProductForm() {
     }));
   };
 
+  // Normale submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setMessage("");
+    // Als er geen afbeelding is, toon waarschuwing
+    if (!form.image) {
+      setShowNoImageWarning(true);
+      return;
+    }
+    await actuallySubmit();
+  };
+
+  // Submit zonder afbeelding na bevestiging
+  const handleForceSubmit = async () => {
+    setShowNoImageWarning(false);
+    await actuallySubmit();
+  };
+
+  // De daadwerkelijke submit logica
+  const actuallySubmit = async () => {
     setLoading(true);
     setMessage("");
-
     const payload = {
       ...form,
       price: Number(form.price),
       oldPrice: form.oldPrice ? Number(form.oldPrice) : null,
       amount: Number(form.amount),
-      image: form.image, // <-- GEEN fallback meer!
+      image: form.image, // mag leeg zijn!
     };
     const res = await fetch("/api/products", {
       method: "POST",
@@ -175,11 +197,30 @@ export default function ProductForm() {
       </div>
       <button
         type="submit"
-        disabled={loading || !form.image}
+        disabled={loading || uploading}
         className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
       >
-        {loading ? "Toevoegen..." : "Toevoegen"}
+        {uploading
+          ? "Afbeelding uploaden..."
+          : loading
+          ? "Toevoegen..."
+          : "Toevoegen"}
       </button>
+      {showNoImageWarning && (
+        <div className="mt-4 bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+          <p className="mb-2">
+            Er is nog geen afbeelding toegevoegd, weet je zeker dat je door wilt
+            gaan?
+          </p>
+          <button
+            type="button"
+            onClick={handleForceSubmit}
+            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
+          >
+            Alsnog toevoegen
+          </button>
+        </div>
+      )}
       {message && <div className="mt-2">{message}</div>}
       <div className="border-t mt-4 pt-4">
         <h3 className="text-lg font-bold mb-2">Voorbeeldweergave</h3>
@@ -187,9 +228,7 @@ export default function ProductForm() {
           <tbody>
             <tr>
               <td className="border px-2 py-1 w-40 h-40">
-                {form.image &&
-                (form.image.startsWith("http") ||
-                  form.image.startsWith("/")) ? (
+                {form.image ? (
                   <Image
                     width={1280}
                     height={1280}
@@ -199,7 +238,7 @@ export default function ProductForm() {
                   />
                 ) : (
                   <div className="w-32 h-32 bg-gray-200 rounded flex items-center justify-center text-gray-400">
-                    Geen afbeelding
+                    <PhotoIcon className="w-12 h-12" />
                   </div>
                 )}
               </td>

@@ -5,12 +5,15 @@ import { Product } from "../../types/types";
 import Image from "next/image";
 import SearchFunction from "@/app/components/SearchFunction";
 import EditProductModal from "./EditProductModal";
+import { PhotoIcon } from "@heroicons/react/24/outline";
 
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [editProduct, setEditProduct] = useState<Product | null>(null);
+  const [popup, setPopup] = useState<string | null>(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState<number | null>(null);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -25,9 +28,20 @@ export default function ProductList() {
 
   // Verwijder product
   async function handleDelete(id: number) {
-    if (!confirm("Weet je zeker dat je dit product wilt verwijderen?")) return;
-    await fetch(`/api/products/${id}`, { method: "DELETE" });
-    setProducts((prev) => prev.filter((p) => p.id !== id));
+    setConfirmDeleteId(null); // Sluit confirm popup
+    const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      setProducts((prev) => prev.filter((p) => p.id !== id));
+    } else {
+      const data = await res.json().catch(() => ({}));
+      if (data?.error === "PRODUCT_HAS_RESERVATIONS") {
+        setPopup(
+          "Dit product is nog gereserveerd en kan niet worden verwijderd."
+        );
+      } else {
+        setPopup("Verwijderen mislukt. Probeer het later opnieuw.");
+      }
+    }
   }
 
   // Bewerk product
@@ -44,7 +58,7 @@ export default function ProductList() {
   if (loading) return <div>Producten laden...</div>;
 
   return (
-    <div className="w-full bg-muted p-4 ">
+    <div className=" bg-muted p-4 w-2/3 mx-auto">
       <h2 className="text-xl font-bold mb-4">Product Overzicht</h2>
       <SearchFunction value={search} onChange={setSearch} />
       <div className="max-h-[700px] overflow-y-auto rounded-lg border">
@@ -89,19 +103,21 @@ export default function ProductList() {
                     className={idx % 2 === 0 ? "bg-white" : "bg-gray-200"}
                   >
                     <td className="border px-2 py-1 w-40 h-40">
-                      <Image
-                        width={1280}
-                        height={1280}
-                        src={
-                          product.image &&
-                          (product.image.startsWith("http") ||
-                            product.image.startsWith("/"))
-                            ? product.image
-                            : "https://picsum.photos/600/400"
-                        }
-                        alt={product.title}
-                        className="w-32 h-32 object-cover rounded"
-                      />
+                      {product.image &&
+                      (product.image.startsWith("http") ||
+                        product.image.startsWith("/")) ? (
+                        <Image
+                          width={1280}
+                          height={1280}
+                          src={product.image}
+                          alt={product.title}
+                          className="w-32 h-32 object-cover rounded"
+                        />
+                      ) : (
+                        <div className="w-32 h-32 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                          <PhotoIcon className="w-12 h-12" />
+                        </div>
+                      )}
                     </td>
                     <td className="border px-2 py-1">{product.title}</td>
                     <td className="border px-2 py-1">€{product.price}</td>
@@ -124,7 +140,7 @@ export default function ProductList() {
                         </button>
                         <button
                           className="bg-red-400 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded w-32"
-                          onClick={() => handleDelete(product.id)}
+                          onClick={() => setConfirmDeleteId(product.id)}
                         >
                           Verwijderen
                         </button>
@@ -143,6 +159,46 @@ export default function ProductList() {
           onSave={handleEditSave}
           onClose={() => setEditProduct(null)}
         />
+      )}
+
+      {/* Popup melding */}
+      {popup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+            <p className="mb-4 text-center">{popup}</p>
+            <button
+              className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
+              onClick={() => setPopup(null)}
+            >
+              Sluiten
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Popup voor verwijderen bevestigen */}
+      {confirmDeleteId !== null && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+            <p className="mb-4 text-center">
+              Weet je zeker dat je dit product wilt verwijderen?
+            </p>
+            <div className="flex gap-4">
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                onClick={() => handleDelete(confirmDeleteId)}
+              >
+                Ja, verwijderen
+              </button>
+              <button
+                className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+                onClick={() => setConfirmDeleteId(null)}
+              >
+                Annuleren
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

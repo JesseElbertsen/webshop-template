@@ -3,7 +3,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Product } from "../types/types";
-import { TagIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, TagIcon } from "@heroicons/react/24/outline";
 
 export default function ProductCard({
   id,
@@ -38,17 +38,19 @@ export default function ProductCard({
         <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[420px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
-            <Image
-              width={300}
-              height={300}
-              src={
-                image && (image.startsWith("http") || image.startsWith("/"))
-                  ? image
-                  : "https://picsum.photos/600/400"
-              }
-              alt={title}
-              className="rounded-t-md h-50 w-full object-cover"
-            />
+            {image && (image.startsWith("http") || image.startsWith("/")) ? (
+              <Image
+                width={300}
+                height={300}
+                src={image}
+                alt={title}
+                className="rounded-t-md h-50 w-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-50 bg-white rounded-t-md flex items-center justify-center text-gray-400">
+                <PhotoIcon className="w-16 h-16" />
+              </div>
+            )}
             {/* Kortingpercentage */}
             {discountPercentage && (
               <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
