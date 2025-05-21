@@ -12,7 +12,7 @@ export default function ProductForm() {
     price: "",
     oldPrice: "",
     amount: "",
-    image: "", // <-- altijd een string!
+    image: "",
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -47,7 +47,7 @@ export default function ProductForm() {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-    // Zet getallen om naar numbers!
+
     const payload = {
       ...form,
       price: Number(form.price),
