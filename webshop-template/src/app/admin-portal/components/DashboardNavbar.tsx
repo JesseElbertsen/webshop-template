@@ -40,6 +40,15 @@ export default function DashboardNavbar({
       >
         Reserveringen
       </button>
+      <button
+        className={`text-left px-4 py-2 rounded transition font-semibold text-white
+          bg-primary hover:bg-primary-light
+          ${active === "businessinfo" ? "bg-primary-light" : ""}
+        `}
+        onClick={() => setActive("businessinfo")}
+      >
+        Bedrijfsgegevens
+      </button>
       {/* Voeg hier extra dashboard secties toe indien gewenst */}
     </nav>
   );

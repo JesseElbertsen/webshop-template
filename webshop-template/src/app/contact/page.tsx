@@ -4,7 +4,7 @@ import Info from "./info";
 export default function page() {
   return (
     <section className="min-h-screen flex flex-col justify-between">
-      <div className="flex flex-col md:flex-row mx-auto justify-center gap-8 p-4">
+      <div className="flex flex-col  mx-auto justify-center gap-8 p-4">
         <div>
           <Info />
         </div>
@@ -15,19 +15,19 @@ export default function page() {
             Heb je vragen of opmerkingen? Neem gerust contact met ons op via
             e-mail of telefoon. We helpen je graag verder!
           </p>
-          <div className="flex flex-row justify-evenly">
+          <div className="flex flex-row justify-evenly items-center mt-4">
             <a
               href="mailto:"
               className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light "
             >
-              button
+              E-mail
             </a>
 
             <a
               href="callto:"
               className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
             >
-              06060606
+              Telefoon
             </a>
           </div>
         </div>

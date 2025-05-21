@@ -39,3 +39,15 @@ model Reservation {
   phone     String
   createdAt DateTime @default(now())
 }
+
+model BusinessInfo {
+  id           Int    @id @default(1)
+  adres        String
+  postcode     String
+  locatie      String
+  telefoon     String
+  email        String
+  kvk          String
+  btw          String
+  openingHours Json
+}

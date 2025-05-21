@@ -4,6 +4,7 @@ import DashboardNavbar from "./components/DashboardNavbar";
 import ProductList from "./components/ProductList";
 import ProductForm from "./components/ProductForm";
 import Reservations from "./components/Reservations";
+import BusinessInfoForm from "./components/BusinessInfoForm";
 
 export default function AdminPortalPage() {
   const [active, setActive] = React.useState<string>("products");
@@ -15,6 +16,7 @@ export default function AdminPortalPage() {
         {active === "products" && <ProductList />}
         {active === "add" && <ProductForm />}
         {active === "reservations" && <Reservations />}
+        {active === "businessinfo" && <BusinessInfoForm />}
       </main>
     </div>
   );
