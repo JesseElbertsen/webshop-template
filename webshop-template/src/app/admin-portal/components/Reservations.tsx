@@ -1,15 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
-type Reservation = {
-  id: string;
-  product?: { title?: string; type?: string; price?: number; amount?: number };
-  productId?: string;
-  name: string;
-  email: string;
-  phone: string;
-  createdAt: string;
-};
+import type { Reservation } from "@/app/types/types";
 
 export default function Reservations() {
   const [reservations, setReservations] = useState<Reservation[]>([]);

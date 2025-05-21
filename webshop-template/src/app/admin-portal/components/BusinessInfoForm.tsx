@@ -1,26 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
-type OpeningHours = {
-  maandag: string;
-  dinsdag: string;
-  woensdag: string;
-  donderdag: string;
-  vrijdag: string;
-  zaterdag: string;
-  zondag: string;
-};
-
-interface BusinessInfo {
-  adres: string;
-  postcode: string;
-  locatie: string;
-  telefoon: string;
-  email: string;
-  kvk: string;
-  btw: string;
-  openingHours: OpeningHours;
-}
+import type { BusinessInfo, OpeningHours } from "@/app/types/types";
 
 const defaultOpeningHours: OpeningHours = {
   maandag: "",
@@ -92,77 +72,86 @@ export default function BusinessInfoForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl bg-white rounded shadow p-4 space-y-4"
+      className=" max-w-5xl mx-auto bg-muted rounded shadow p-4 "
     >
-      <h2 className="text-xl font-bold mb-2">Bedrijfsgegevens aanpassen</h2>
-      <div className="grid grid-cols-1 gap-2">
-        <input
-          name="adres"
-          value={info.adres}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="Adres"
-        />
-        <input
-          name="postcode"
-          value={info.postcode}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="Postcode"
-        />
-        <input
-          name="locatie"
-          value={info.locatie}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="Locatie"
-        />
-        <input
-          name="telefoon"
-          value={info.telefoon}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="Telefoon"
-        />
-        <input
-          name="email"
-          value={info.email}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="E-mail"
-        />
-        <input
-          name="kvk"
-          value={info.kvk}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="KvK"
-        />
-        <input
-          name="btw"
-          value={info.btw}
-          onChange={handleChange}
-          className="border p-2 rounded"
-          placeholder="BTW"
-        />
+      <div className="flex flex-row gap-8">
+        <div className="flex-1 w-1/2">
+          <h2 className="text-xl font-bold mb-2">Bedrijfsgegevens aanpassen</h2>
+          <div className="grid grid-cols-1 gap-2">
+            <input
+              name="adres"
+              value={info.adres}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="Adres"
+            />
+            <input
+              name="postcode"
+              value={info.postcode}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="Postcode"
+            />
+            <input
+              name="locatie"
+              value={info.locatie}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="Locatie"
+            />
+            <input
+              name="telefoon"
+              value={info.telefoon}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="Telefoon"
+            />
+            <input
+              name="email"
+              value={info.email}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="E-mail"
+            />
+            <input
+              name="kvk"
+              value={info.kvk}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="KvK"
+            />
+            <input
+              name="btw"
+              value={info.btw}
+              onChange={handleChange}
+              className="border p-2 rounded bg-white"
+              placeholder="BTW"
+            />
+          </div>
+        </div>
+        <div className="flex-1 w-1/2">
+          <h3 className="text-lg font-bold mt-4">Openingstijden</h3>
+          <div className="grid grid-cols-1 gap-2">
+            {Object.entries(info.openingHours).map(
+              ([dag, tijd]: [string, string]) => (
+                <div key={dag} className="flex gap-2 items-center">
+                  <label className="w-24 capitalize">{dag}:</label>
+                  <input
+                    type="text"
+                    value={tijd}
+                    onChange={(e) =>
+                      handleOpeningHoursChange(dag, e.target.value)
+                    }
+                    className="border p-2 rounded flex-1 bg-white"
+                    placeholder="Bijv. 9:00 - 18:00 of Gesloten"
+                  />
+                </div>
+              )
+            )}
+          </div>
+        </div>
       </div>
-      <h3 className="text-lg font-bold mt-4">Openingstijden</h3>
-      <div className="grid grid-cols-1 gap-2">
-        {Object.entries(info.openingHours).map(
-          ([dag, tijd]: [string, string]) => (
-            <div key={dag} className="flex gap-2 items-center">
-              <label className="w-24 capitalize">{dag}:</label>
-              <input
-                type="text"
-                value={tijd}
-                onChange={(e) => handleOpeningHoursChange(dag, e.target.value)}
-                className="border p-2 rounded flex-1"
-                placeholder="Bijv. 9:00 - 18:00 of Gesloten"
-              />
-            </div>
-          )
-        )}
-      </div>
+
       <button
         type="submit"
         className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
