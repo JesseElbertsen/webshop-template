@@ -26,7 +26,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   const isOutOfStock = product.amount === 0;
 
   return (
-    <div className="min-h-screen md:mt-8">
+    <div className="min-h-screen md:mt-8 md:p-0 p-2">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
         <div className="w-full">
@@ -42,7 +42,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 className="rounded-md object-cover w-[700px] h-[500px]"
               />
             ) : (
-              <div className="w-[600px] h-[500px] bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
+              <div className="md:w-[600px] md:h-[500px] bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-24 h-24" />
               </div>
             )}

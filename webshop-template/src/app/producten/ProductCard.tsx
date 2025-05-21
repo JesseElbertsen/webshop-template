@@ -40,8 +40,9 @@ export default function ProductCard({
           <div className="relative">
             {image && (image.startsWith("http") || image.startsWith("/")) ? (
               <Image
-                width={300}
-                height={300}
+                priority
+                width={1500}
+                height={1500}
                 src={image}
                 alt={title}
                 className="rounded-t-md h-50 w-full object-cover"
