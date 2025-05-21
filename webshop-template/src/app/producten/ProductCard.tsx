@@ -29,13 +29,13 @@ export default function ProductCard({
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{
-        duration: 0.5,
+        duration: 0.3,
         ease: "easeOut",
         delay: inView ? index * 0.2 : 0,
       }}
     >
       <Link href={`/producten/${id}`}>
-        <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[400px] flex flex-col justify-between relative">
+        <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[420px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
             <Image
@@ -47,7 +47,7 @@ export default function ProductCard({
                   : "https://picsum.photos/600/400"
               }
               alt={title}
-              className="rounded-md h-40 w-full object-cover"
+              className="rounded-t-md h-50 w-full object-cover"
             />
             {/* Kortingpercentage */}
             {discountPercentage && (
@@ -59,7 +59,7 @@ export default function ProductCard({
           <div className="p-4">
             {/* Titel en aantal */}
             <div className="flex justify-between items-center ">
-              <h2 className="text-lg font-semibold p-2 text-black break-words line-clamp-2">
+              <h2 className="text-lg font-semibold text-black break-words truncate p-2">
                 {title}
               </h2>
               {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">

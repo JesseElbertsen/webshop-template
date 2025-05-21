@@ -117,13 +117,13 @@ export default function ProductList() {
                     <td className="border px-2 py-1">
                       <div className="flex flex-col gap-2 items-center">
                         <button
-                          className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold py-1 px-3 rounded w-32"
+                          className="bg-primary hover:bg-primary-light text-white font-semibold py-1 px-3 rounded w-32"
                           onClick={() => setEditProduct(product)}
                         >
                           Bewerken
                         </button>
                         <button
-                          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded w-32"
+                          className="bg-red-400 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded w-32"
                           onClick={() => handleDelete(product.id)}
                         >
                           Verwijderen

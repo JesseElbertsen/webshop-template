@@ -81,7 +81,7 @@ export default function ProductForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-muted p-4 rounded shadow w-full   "
+      className="bg-muted p-4 rounded shadow w-2/3 mx-auto "
     >
       <h2 className="text-lg font-bold mb-4">Nieuw product toevoegen</h2>
       <div className="mb-2">
@@ -161,7 +161,7 @@ export default function ProductForm() {
         />
       </div>
       <div className="mb-4">
-        <label className="block">Afbeelding (nog niet werkend)</label>
+        <label className="block">Afbeelding </label>
         <input
           type="file"
           accept="image/*"
@@ -176,7 +176,7 @@ export default function ProductForm() {
       <button
         type="submit"
         disabled={loading || !form.image}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
       >
         {loading ? "Toevoegen..." : "Toevoegen"}
       </button>
