@@ -105,34 +105,41 @@ export default function EditProductModal({
           </div>
           <div>
             <label className="block mb-1 font-semibold">Specificaties</label>
-            {(form.info ?? []).map((spec, idx) => (
-              <div key={idx} className="flex gap-2 mb-2">
-                <input
-                  type="text"
-                  placeholder="Kenmerk (bv. kleur)"
-                  value={spec.key}
-                  onChange={(e) => handleSpecChange(idx, "key", e.target.value)}
-                  className="border p-2 rounded w-1/3"
-                />
-                <input
-                  type="text"
-                  placeholder="Waarde (bv. rood)"
-                  value={spec.value}
-                  onChange={(e) =>
-                    handleSpecChange(idx, "value", e.target.value)
-                  }
-                  className="border p-2 rounded w-1/2"
-                />
-                <button
-                  type="button"
-                  className="text-red-500 hover:text-red-700"
-                  onClick={() => handleRemoveSpec(idx)}
-                  title="Verwijder"
-                >
-                  <TrashIcon className="w-5 h-5" />
-                </button>
-              </div>
-            ))}
+            <div
+              className="max-h-56 overflow-y-auto"
+              style={{ maxHeight: "14rem" }} // 4 x ~3.5rem per rij
+            >
+              {(form.info ?? []).map((spec, idx) => (
+                <div key={idx} className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    placeholder="Kenmerk (bv. kleur)"
+                    value={spec.key}
+                    onChange={(e) =>
+                      handleSpecChange(idx, "key", e.target.value)
+                    }
+                    className="border p-2 rounded w-1/3"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Waarde (bv. rood)"
+                    value={spec.value}
+                    onChange={(e) =>
+                      handleSpecChange(idx, "value", e.target.value)
+                    }
+                    className="border p-2 rounded w-1/2"
+                  />
+                  <button
+                    type="button"
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => handleRemoveSpec(idx)}
+                    title="Verwijder"
+                  >
+                    <TrashIcon className="w-5 h-5" />
+                  </button>
+                </div>
+              ))}
+            </div>
             <button
               type="button"
               className="flex items-center gap-1 text-primary hover:underline mt-2"

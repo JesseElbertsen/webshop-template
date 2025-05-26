@@ -52,8 +52,8 @@ export default function ProductDetails({ product }: { product: Product }) {
                     <Image
                       src={product.image}
                       alt={product.title}
-                      width={1500}
-                      height={1500}
+                      width={2000}
+                      height={2000}
                       className="rounded-lg max-h-[90vh] max-w-[90vw] object-contain shadow-lg"
                       onClick={(e) => e.stopPropagation()}
                     />
@@ -101,9 +101,11 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </h2>
                 <ul>
                   {product.info.map((spec, idx) => (
-                    <li key={idx} className="flex gap-2">
-                      <span className="font-semibold">{spec.key}:</span>
-                      <span>{spec.value}</span>
+                    <li key={idx} className="grid grid-cols-2 gap-2 py-1">
+                      <span className="font-semibold break-words">
+                        {spec.key}:
+                      </span>
+                      <span className="break-words">{spec.value}</span>
                     </li>
                   ))}
                 </ul>

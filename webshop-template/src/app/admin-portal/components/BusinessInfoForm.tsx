@@ -72,7 +72,7 @@ export default function BusinessInfoForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" max-w-5xl mx-auto bg-muted rounded shadow p-4 "
+      className=" max-w-5xl mx-auto bg-container rounded shadow p-4 "
     >
       <div className="flex flex-row gap-8">
         <div className="flex-1 w-1/2">
