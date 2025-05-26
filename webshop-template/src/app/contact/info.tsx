@@ -25,8 +25,8 @@ export default function Info() {
 
   return (
     <div className="flex flex-col md:flex-row md:gap-8 space-y-4 md:space-y-0">
-      <div className="bg-white rounded shadow p-4 flex-1 flex flex-col">
-        <h3 className="text-lg font-bold mb-2">Bedrijfsgegevens</h3>
+      <div className="bg-container rounded shadow p-4 flex-1 flex flex-col">
+        <h3 className="text-lg text-text font-bold mb-2">Bedrijfsgegevens</h3>
         <div className="grid grid-cols-1 gap-2 flex-1">
           <div>
             <span className="font-semibold">Adres:</span> {businessInfo.adres}
@@ -54,8 +54,8 @@ export default function Info() {
           </div>
         </div>
       </div>
-      <div className="bg-white rounded shadow p-4 flex-1 flex flex-col">
-        <h3 className="text-lg font-bold mb-2">Openingstijden</h3>
+      <div className="bg-container rounded shadow p-4 flex-1 flex flex-col">
+        <h3 className="text-lg text-text font-bold mb-2">Openingstijden</h3>
         <div className="flex-1">
           {businessInfo.openingHours &&
             Object.entries(businessInfo.openingHours).map(

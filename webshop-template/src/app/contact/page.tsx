@@ -9,8 +9,10 @@ export default function page() {
           <Info />
         </div>
 
-        <div className="bg-muted shadow rounded p-4  md:w-[500px]">
-          <h2 className="text-2xl font-bold mt-4 ">Neem contact met ons op</h2>
+        <div className="bg-container shadow rounded p-4  md:w-[500px]">
+          <h2 className="text-2xl text-text font-bold mt-4 ">
+            Neem contact met ons op
+          </h2>
           <p className="my-2">
             Heb je vragen of opmerkingen? Neem gerust contact met ons op via
             e-mail of telefoon. We helpen je graag verder!

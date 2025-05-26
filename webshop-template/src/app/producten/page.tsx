@@ -51,7 +51,7 @@ export default function Page() {
   return (
     <main className="flex flex-col md:flex-row gap-4 min-h-screen md:px-4 md:py-8">
       {/* Filter */}
-      <div className="bg-muted rounded-2xl shadow-2xl p-4 flex-shrink-0 w-full md:w-64">
+      <div className="bg-container rounded-2xl shadow-2xl p-4 flex-shrink-0 w-full md:w-64">
         <Filter
           options={productTypes}
           onFilterChange={setTypeFilter}

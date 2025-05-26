@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ConditionalNavBar />
-        <main>{children}</main>
+        <main className="bg-background">{children}</main>
         <footer className="p-4 bg-primary text-sm text-center text-gray-500">
           <Footer />
         </footer>

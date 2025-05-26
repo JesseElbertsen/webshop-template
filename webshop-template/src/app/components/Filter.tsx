@@ -73,7 +73,7 @@ export default function Filter({
             Product Type
           </button>
           {showDropdown && (
-            <ul className="absolute left-0 right-0 bg-white border rounded shadow z-10 mt-1">
+            <ul className="absolute left-0 right-0 bg-container-light text-text-light border border-border rounded shadow z-10 mt-1">
               {options.map((option) => (
                 <li key={option}>
                   <button
