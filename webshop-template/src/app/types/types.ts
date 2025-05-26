@@ -2,7 +2,7 @@ export type Product = {
   id: number;
   title: string;
   description: string;
-  info: string;
+  info?: { key: string; value: string }[]; // <-- nu een optionele array van key-value paren
   amount: number;
   image?: string | null;
   price: number;

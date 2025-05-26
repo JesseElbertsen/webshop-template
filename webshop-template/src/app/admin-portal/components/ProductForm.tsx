@@ -2,13 +2,24 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { PhotoIcon } from "@heroicons/react/24/outline";
+import { PhotoIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+
+type ProductSpec = { key: string; value: string };
 
 export default function ProductForm() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    title: string;
+    description: string;
+    info: ProductSpec[];
+    type: string;
+    price: string;
+    oldPrice: string;
+    amount: string;
+    image: string;
+  }>({
     title: "",
     description: "",
-    info: "",
+    info: [], // nu goed getypeerd!
     type: "",
     price: "",
     oldPrice: "",
@@ -48,6 +59,36 @@ export default function ProductForm() {
     }));
   };
 
+  // Voeg een nieuwe lege specificatie toe
+  function handleAddSpec() {
+    setForm((f) => ({
+      ...f,
+      info: [...(f.info ?? []), { key: "", value: "" }],
+    }));
+  }
+
+  // Verwijder een specificatie
+  function handleRemoveSpec(idx: number) {
+    setForm((f) => ({
+      ...f,
+      info: (f.info ?? []).filter((_, i) => i !== idx),
+    }));
+  }
+
+  // Bewerk een key of value van een specificatie
+  function handleSpecChange(
+    idx: number,
+    field: "key" | "value",
+    value: string
+  ) {
+    setForm((f) => ({
+      ...f,
+      info: (f.info ?? []).map((spec, i) =>
+        i === idx ? { ...spec, [field]: value } : spec
+      ),
+    }));
+  }
+
   // Normale submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,7 +116,10 @@ export default function ProductForm() {
       price: Number(form.price),
       oldPrice: form.oldPrice ? Number(form.oldPrice) : null,
       amount: Number(form.amount),
-      image: form.image, // mag leeg zijn!
+      image: form.image,
+      info: form.info.filter(
+        (spec) => spec.key.trim() !== "" && spec.value.trim() !== ""
+      ), // alleen ingevulde specificaties meesturen
     };
     const res = await fetch("/api/products", {
       method: "POST",
@@ -87,7 +131,7 @@ export default function ProductForm() {
       setForm({
         title: "",
         description: "",
-        info: "",
+        info: [],
         type: "",
         price: "",
         oldPrice: "",
@@ -126,15 +170,64 @@ export default function ProductForm() {
           className="border p-2 rounded w-full bg-white"
         />
       </div>
+
       <div className="mb-2">
-        <label className="block">Extra informatie</label>
-        <textarea
-          name="info"
-          value={form.info}
-          onChange={handleChange}
-          className="border p-2 rounded w-full bg-white"
-        />
+        <label className="block">Product specificaties</label>
+        {(form.info ?? []).map((spec, idx) => (
+          <div key={idx} className="flex gap-2 mb-2">
+            <input
+              type="text"
+              placeholder="Kenmerk (bv. kleur)"
+              value={spec.key}
+              onChange={(e) => handleSpecChange(idx, "key", e.target.value)}
+              className="border p-2 rounded w-1/3"
+            />
+            <input
+              type="text"
+              placeholder="Waarde (bv. rood)"
+              value={spec.value}
+              onChange={(e) => handleSpecChange(idx, "value", e.target.value)}
+              className="border p-2 rounded w-1/2"
+            />
+            <button
+              type="button"
+              className="text-red-500 hover:text-red-700"
+              onClick={() => handleRemoveSpec(idx)}
+              title="Verwijder"
+            >
+              <TrashIcon className="w-5 h-5" />
+            </button>
+          </div>
+        ))}
+        <button
+          type="button"
+          className="flex items-center gap-1 text-primary hover:underline mt-2"
+          onClick={handleAddSpec}
+        >
+          <PlusIcon className="w-5 h-5" />
+          Kenmerk toevoegen
+        </button>
+        {/* Voorbeeld tekstvak met de toegevoegde specificaties */}
+        <div className="mt-4">
+          <label className="block text-sm text-gray-600 mb-1">
+            Voorbeeldweergave:
+          </label>
+          <textarea
+            className="border p-2 rounded w-full bg-gray-50 text-gray-700"
+            rows={Math.max(2, form.info.length)}
+            value={
+              form.info.length === 0
+                ? "Geen specificaties toegevoegd."
+                : form.info
+                    .filter((spec) => spec.key.trim() && spec.value.trim())
+                    .map((spec) => `${spec.key}: ${spec.value}`)
+                    .join("\n")
+            }
+            readOnly
+          />
+        </div>
       </div>
+
       <div className="mb-2">
         <label className="block">Type</label>
         <input

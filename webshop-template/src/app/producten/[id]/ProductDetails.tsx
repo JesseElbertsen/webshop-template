@@ -22,6 +22,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       : null;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [imageModalOpen, setImageModalOpen] = useState(false);
 
   const isOutOfStock = product.amount === 0;
 
@@ -34,13 +35,38 @@ export default function ProductDetails({ product }: { product: Product }) {
             {product.image &&
             (product.image.startsWith("http") ||
               product.image.startsWith("/")) ? (
-              <Image
-                src={product.image}
-                alt={product.title}
-                width={1500}
-                height={1500}
-                className="rounded-md object-cover w-[700px] h-[500px]"
-              />
+              <>
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  width={1500}
+                  height={1500}
+                  className="rounded-md object-cover w-[700px] h-[500px] cursor-zoom-in"
+                  onClick={() => setImageModalOpen(true)}
+                />
+                {imageModalOpen && (
+                  <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+                    onClick={() => setImageModalOpen(false)}
+                  >
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      width={1500}
+                      height={1500}
+                      className="rounded-lg max-h-[90vh] max-w-[90vw] object-contain shadow-lg"
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                    <button
+                      className="absolute top-6 right-8 text-white text-3xl font-bold"
+                      onClick={() => setImageModalOpen(false)}
+                      aria-label="Sluit"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="md:w-[600px] md:h-[500px] bg-black rounded-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-24 h-24" />
@@ -67,13 +93,22 @@ export default function ProductDetails({ product }: { product: Product }) {
               </h2>
               <p className="text-text">{product.description}</p>
             </div>
-            <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
-              <h2 className="mb-2 flex items-center gap-2">
-                <InformationCircleIcon className="w-5 h-5 text-primary" />
-                Product Informatie:
-              </h2>
-              <p className="text-text">{product.info}</p>
-            </div>
+            {product.info && product.info.length > 0 && (
+              <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
+                <h2 className="mb-2 flex items-center gap-2">
+                  <InformationCircleIcon className="w-5 h-5 text-primary" />
+                  Product Specificaties:
+                </h2>
+                <ul>
+                  {product.info.map((spec, idx) => (
+                    <li key={idx} className="flex gap-2">
+                      <span className="font-semibold">{spec.key}:</span>
+                      <span>{spec.value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Acties */}

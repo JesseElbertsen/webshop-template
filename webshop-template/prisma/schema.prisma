@@ -17,7 +17,7 @@ model Product {
   id          Int           @id @default(autoincrement())
   title       String
   description String
-  info        String
+  info        Json?         // <-- aangepast: nu een optioneel JSON veld
   type        String
   price       Float
   oldPrice    Float?

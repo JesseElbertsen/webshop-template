@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Jouw Webshop Naam | Unieke producten & aanbiedingen",
   description:
-    "Ontdek de beste deals en unieke producten bij Jouw Webshop. Veilig bestellen, snelle levering en uitstekende service.",
+    "Ontdek de beste deals en unieke producten bij Jouw Webshop. Veilig reserveren, snelle levering en uitstekende service.",
   keywords: [
     "webshop",
     "online winkel",
