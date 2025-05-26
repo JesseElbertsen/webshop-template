@@ -26,8 +26,8 @@ export default function ProductDetails({ product }: { product: Product }) {
   const isOutOfStock = product.amount === 0;
 
   return (
-    <div className="min-h-screen md:mt-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-muted shadow rounded-xl md:p-6 p-2">
+    <div className="md:my-16 md:p-0 p-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-container shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
         <div className="w-full">
           <div className="relative">
@@ -42,7 +42,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 className="rounded-md object-cover w-[700px] h-[500px]"
               />
             ) : (
-              <div className="w-[600px] h-[500px] bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
+              <div className="md:w-[600px] md:h-[500px] bg-black rounded-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-24 h-24" />
               </div>
             )}
@@ -51,8 +51,8 @@ export default function ProductDetails({ product }: { product: Product }) {
 
         {/* Productinformatie */}
         <div className="flex flex-col justify-between">
-          <div className="font-bold text-gray-500">
-            <h1 className="text-3xl font-bold text-black flex items-center gap-2 justify-between">
+          <div className="font-bold">
+            <h1 className="text-3xl font-bold text-text flex items-center gap-2 justify-between">
               {product.title}
               {discountPercentage && (
                 <span className="bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
@@ -60,19 +60,19 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </span>
               )}
             </h1>
-            <div className="mt-4 bg-white p-4 rounded-md shadow-md">
+            <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
               <h2 className="mb-2 flex items-center gap-2">
                 <DocumentTextIcon className="w-5 h-5 text-primary" />
                 Beschrijving:
               </h2>
-              <p>{product.description}</p>
+              <p className="text-text">{product.description}</p>
             </div>
-            <div className="mt-4 bg-white p-4 rounded-md shadow-md">
+            <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
               <h2 className="mb-2 flex items-center gap-2">
                 <InformationCircleIcon className="w-5 h-5 text-primary" />
                 Product Informatie:
               </h2>
-              <p>{product.info}</p>
+              <p className="text-text">{product.info}</p>
             </div>
           </div>
 
@@ -117,6 +117,8 @@ export default function ProductDetails({ product }: { product: Product }) {
             )}
             <ReservationModal
               productId={product.id}
+              productPrice={product.price}
+              maxAmount={product.amount}
               open={modalOpen}
               onClose={() => setModalOpen(false)}
             />

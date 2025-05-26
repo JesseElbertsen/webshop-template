@@ -37,5 +37,19 @@ model Reservation {
   name      String
   email     String
   phone     String
+  amount    Int      @default(1) // nieuw veld
+  note      String?              // nieuw veld
   createdAt DateTime @default(now())
+}
+
+model BusinessInfo {
+  id           Int    @id @default(1)
+  adres        String
+  postcode     String
+  locatie      String
+  telefoon     String
+  email        String
+  kvk          String
+  btw          String
+  openingHours Json
 }

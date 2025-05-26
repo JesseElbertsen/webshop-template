@@ -22,15 +22,15 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", href: "/", icon: HomeIcon },
     { name: "Over ons", href: "/over-ons", icon: InformationCircleIcon },
-    { name: "producten", href: "/producten", icon: ShoppingBagIcon },
+    { name: "Producten", href: "/producten", icon: ShoppingBagIcon },
     { name: "Contact", href: "/contact", icon: EnvelopeIcon },
   ];
 
   return (
-    <nav className="relative top-0 w-full z-50 shadow-xl text-xl">
+    <nav className="relative top-0 w-full z-50 shadow-xl text-xl bg-container">
       {/* Desktop Navbar */}
       <div className="hidden md:flex justify-between items-center bg-muted h-[6rem] backdrop-blur-md text-white py-4 px-10 relative">
-        <Link href="/" className="text-2xl text-black z-50">
+        <Link href="/" className="text-2xl text-text z-50">
           logo hier
         </Link>
         <ul className="flex space-x-10">
@@ -56,20 +56,20 @@ const Navbar = () => {
           className="absolute top-6 right-8 z-50"
         >
           {open ? (
-            <XMarkIcon className="w-10 h-10 text-black" />
+            <XMarkIcon className="w-10 h-10 text-text" />
           ) : (
-            <Bars3BottomRightIcon className="w-10 h-10 text-black" />
+            <Bars3BottomRightIcon className="w-10 h-10 text-text" />
           )}
         </button>
 
         {/* Menu Overlay */}
         <div
-          className={`fixed inset-0 z-40 bg-muted transform transition-transform duration-300 ${
+          className={`fixed inset-0 z-40 bg-container transform transition-transform duration-300 ${
             open ? "translate-y-0" : "-translate-y-full"
           }`}
         >
           <ul
-            className="flex flex-col items-center justify-center h-full space-y-8 text-black text-4xl opacity-0 transition-opacity duration-500 ease-in-out delay-200"
+            className="flex flex-col items-center justify-center h-full space-y-8 text-text text-4xl opacity-0 transition-opacity duration-500 ease-in-out delay-200"
             style={{ opacity: open ? 1 : 0 }}
           >
             {navLinks.map((link, index) => (

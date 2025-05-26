@@ -44,10 +44,10 @@ export default function SaleItems() {
   return (
     <section className="w-full px-4 py-8 relative">
       <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-3xl font-bold text-black mb-2">
+        <h1 className="text-3xl font-bold text-text mb-2">
           Afgeprijsde Producten
         </h1>
-        <p className="text-gray-500 text-lg mb-6">
+        <p className="text-text-light text-lg mb-6">
           Bekijk onze afgeprijsde producten met korting!
         </p>
       </div>
@@ -75,7 +75,7 @@ export default function SaleItems() {
                 className="snap-start flex-shrink-0"
                 style={{ width: "calc(100% - 2rem)", maxWidth: "300px" }}
               >
-                <div className="shadow-xl rounded-xl bg-muted cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative w-full">
+                <div className="shadow-xl rounded-xl bg-container cursor-pointer hover:shadow-lg transition-shadow h-[400px] flex flex-col justify-between relative w-full">
                   <div className="relative">
                     {product.image &&
                     (product.image.startsWith("http") ||
@@ -99,7 +99,7 @@ export default function SaleItems() {
                     )}
                   </div>
                   <div className="p-4">
-                    <h2 className="text-lg font-semibold mt-2 text-black ">
+                    <h2 className="text-lg font-semibold mt-2 text-text ">
                       {product.title}
                     </h2>
                     <div className="mt-4 flex items-center justify-between">

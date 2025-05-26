@@ -21,7 +21,7 @@ export default function SearchFunction({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="p-2 pl-10 border rounded w-full bg-white text-black"
+        className="p-2 pl-10  rounded w-full bg-container-light border border-border text-text"
       />
       <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
     </div>

@@ -1,64 +1,38 @@
 import React from "react";
+import Info from "./info";
 
 export default function page() {
   return (
-    <section>
-      <div className="min-h-screen flex flex-col items-center justify-center  p-4">
-        <h1 className="text-3xl font-bold text-black mb-4">Contact</h1>
-        <p className="text-gray-500 text-lg mb-4">
-          Neem contact met ons op via het onderstaande formulier.
-        </p>
-        <form className="bg-muted shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-lg">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="name"
-            >
-              Naam
-            </label>
-            <input
-              className="shadow appearance-none bg-white border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="Naam"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2 "
-              htmlFor="email"
+    <section className="min-h-screen flex flex-col justify-between">
+      <div className="flex flex-col  mx-auto justify-center gap-8 p-4">
+        <div>
+          <Info />
+        </div>
+
+        <div className="bg-container shadow rounded p-4  md:w-[500px]">
+          <h2 className="text-2xl text-text font-bold mt-4 ">
+            Neem contact met ons op
+          </h2>
+          <p className="my-2">
+            Heb je vragen of opmerkingen? Neem gerust contact met ons op via
+            e-mail of telefoon. We helpen je graag verder!
+          </p>
+          <div className="flex flex-row justify-evenly items-center mt-4">
+            <a
+              href="mailto:"
+              className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light "
             >
               E-mail
-            </label>
-            <input
-              className=" bg-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="E-mail"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="message"
+            </a>
+
+            <a
+              href="callto:"
+              className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
             >
-              Bericht
-            </label>
-            <textarea
-              className="shadow bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-[200px] resize-none"
-              id="message"
-              placeholder="Bericht"
-            ></textarea>
+              Telefoon
+            </a>
           </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Verzenden
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </section>
   );

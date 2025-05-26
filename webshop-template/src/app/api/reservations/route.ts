@@ -21,17 +21,39 @@ export async function GET() {
 
 // Maak een nieuwe reservering aan en verlaag voorraad
 export async function POST(req: Request) {
-  const { productId, name, email, phone } = await req.json();
+  const { productId, name, email, phone, amount, note } = await req.json();
+
+  // Haal huidige voorraad op
+  const product = await prisma.product.findUnique({ where: { id: productId } });
+  if (!product) {
+    return NextResponse.json(
+      { error: "Product niet gevonden" },
+      { status: 404 }
+    );
+  }
+  if (amount > product.amount) {
+    return NextResponse.json(
+      { error: "Niet genoeg voorraad beschikbaar" },
+      { status: 400 }
+    );
+  }
 
   // Maak reservering aan
   const reservation = await prisma.reservation.create({
-    data: { productId, name, email, phone },
+    data: {
+      productId,
+      name,
+      email,
+      phone,
+      amount,
+      note,
+    },
   });
 
-  // Verlaag voorraad van het product
+  // Verlaag voorraad met het bestelde aantal
   await prisma.product.update({
     where: { id: productId },
-    data: { amount: { decrement: 1 } },
+    data: { amount: { decrement: amount } },
   });
 
   return NextResponse.json(reservation);

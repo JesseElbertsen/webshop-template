@@ -35,19 +35,20 @@ export default function ProductCard({
       }}
     >
       <Link href={`/producten/${id}`}>
-        <div className="shadow-xl rounded-xl bg-muted cursor-pointer   h-[420px] flex flex-col justify-between relative">
+        <div className="shadow-xl rounded-md bg-container  cursor-pointer   h-[430px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
             {image && (image.startsWith("http") || image.startsWith("/")) ? (
               <Image
-                width={300}
-                height={300}
+                priority
+                width={1500}
+                height={1500}
                 src={image}
                 alt={title}
                 className="rounded-t-md h-50 w-full object-cover"
               />
             ) : (
-              <div className="w-full h-50 bg-white rounded-t-md flex items-center justify-center text-gray-400">
+              <div className="w-full h-50 bg-black rounded-t-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-16 h-16" />
               </div>
             )}
@@ -61,7 +62,7 @@ export default function ProductCard({
           <div className="p-4">
             {/* Titel en aantal */}
             <div className="flex justify-between items-center ">
-              <h2 className="text-lg font-semibold text-black break-words truncate p-2">
+              <h2 className="text-lg font-semibold text-text break-words truncate p-2">
                 {title}
               </h2>
               {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
@@ -70,7 +71,7 @@ export default function ProductCard({
             </div>
 
             {/* Beschrijving */}
-            <p className="bg-white p-2 rounded inset-shadow-2xs h-[6rem] overflow-hidden">
+            <p className="bg-container-light border border-border p-2 text-text-light rounded inset-shadow-2xs h-[6rem] overflow-hidden">
               {description}
             </p>
 
