@@ -18,6 +18,8 @@ export type Reservation = {
   name: string;
   email: string;
   phone: string;
+  amount: number; // toegevoegd
+  note?: string; // toegevoegd
   createdAt: string;
 };
 

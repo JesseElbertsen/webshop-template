@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalNavBar from "./components/ConditionalNavBar";
-import Footer from "./components/Footer";
+import ConditionalFooter from "./components/ConditionalFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +35,8 @@ export default function RootLayout({
       >
         <ConditionalNavBar />
         <main className="bg-background">{children}</main>
-        <footer className="p-4 bg-primary text-sm text-center text-gray-500">
-          <Footer />
+        <footer>
+          <ConditionalFooter />
         </footer>
       </body>
     </html>

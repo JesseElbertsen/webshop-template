@@ -117,6 +117,8 @@ export default function ProductDetails({ product }: { product: Product }) {
             )}
             <ReservationModal
               productId={product.id}
+              productPrice={product.price}
+              maxAmount={product.amount}
               open={modalOpen}
               onClose={() => setModalOpen(false)}
             />

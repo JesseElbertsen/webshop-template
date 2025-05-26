@@ -132,22 +132,28 @@ export default function BusinessInfoForm() {
         <div className="flex-1 w-1/2">
           <h3 className="text-lg font-bold mt-4">Openingstijden</h3>
           <div className="grid grid-cols-1 gap-2">
-            {Object.entries(info.openingHours).map(
-              ([dag, tijd]: [string, string]) => (
-                <div key={dag} className="flex gap-2 items-center">
-                  <label className="w-24 capitalize">{dag}:</label>
-                  <input
-                    type="text"
-                    value={tijd}
-                    onChange={(e) =>
-                      handleOpeningHoursChange(dag, e.target.value)
-                    }
-                    className="border p-2 rounded flex-1 bg-white"
-                    placeholder="Bijv. 9:00 - 18:00 of Gesloten"
-                  />
-                </div>
-              )
-            )}
+            {[
+              "maandag",
+              "dinsdag",
+              "woensdag",
+              "donderdag",
+              "vrijdag",
+              "zaterdag",
+              "zondag",
+            ].map((dag) => (
+              <div key={dag} className="flex gap-2 items-center">
+                <label className="w-24 capitalize">{dag}:</label>
+                <input
+                  type="text"
+                  value={info.openingHours[dag as keyof OpeningHours] || ""}
+                  onChange={(e) =>
+                    handleOpeningHoursChange(dag, e.target.value)
+                  }
+                  className="border p-2 rounded flex-1 bg-white"
+                  placeholder="Bijv. 9:00 - 18:00 of Gesloten"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -58,13 +58,13 @@ export default function ProductList() {
   if (loading) return <div>Producten laden...</div>;
 
   return (
-    <div className=" bg-muted p-4 w-2/3 mx-auto">
+    <div className=" bg-container shadow-md p-4 w-2/3 mx-auto">
       <h2 className="text-xl font-bold mb-4">Product Overzicht</h2>
       <SearchFunction value={search} onChange={setSearch} />
       <div className="max-h-[700px] overflow-y-auto rounded-lg border">
         <table className="w-full">
           <thead>
-            <tr>
+            <tr className="bg-gray-100 sticky top-0 z-10 border border-gray-200">
               <th className="border px-2 py-1 w-40 sticky top-0 bg-muted z-10">
                 Afbeelding
               </th>

@@ -58,17 +58,23 @@ export default function Info() {
         <h3 className="text-lg text-text font-bold mb-2">Openingstijden</h3>
         <div className="flex-1">
           {businessInfo.openingHours &&
-            Object.entries(businessInfo.openingHours).map(
-              ([dag, tijd]: [string, string]) => (
-                <div
-                  key={dag}
-                  className="grid md:grid-cols-2 grid-cols-[1fr_2fr] py-2 mx-auto gap-4 items-center border-b border-gray-300"
-                >
-                  <div className="font-semibold">{dag}:</div>
-                  <div>{tijd}</div>
-                </div>
-              )
-            )}
+            [
+              "maandag",
+              "dinsdag",
+              "woensdag",
+              "donderdag",
+              "vrijdag",
+              "zaterdag",
+              "zondag",
+            ].map((dag) => (
+              <div
+                key={dag}
+                className="grid md:grid-cols-2 grid-cols-[1fr_2fr] py-2 mx-auto gap-4 items-center border-b border-gray-300"
+              >
+                <div className="font-semibold">{dag}:</div>
+                <div>{businessInfo.openingHours?.[dag]}</div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

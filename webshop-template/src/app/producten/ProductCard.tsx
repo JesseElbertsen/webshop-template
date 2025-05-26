@@ -35,7 +35,7 @@ export default function ProductCard({
       }}
     >
       <Link href={`/producten/${id}`}>
-        <div className="shadow-xl rounded-md bg-container  cursor-pointer   h-[420px] flex flex-col justify-between relative">
+        <div className="shadow-xl rounded-md bg-container  cursor-pointer   h-[430px] flex flex-col justify-between relative">
           {/* Productafbeelding */}
           <div className="relative">
             {image && (image.startsWith("http") || image.startsWith("/")) ? (

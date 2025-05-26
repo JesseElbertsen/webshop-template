@@ -78,5 +78,5 @@ body {
 
 .slider-scrollbar {
   scrollbar-width: thin; /* Voor Firefox: dunne scrollbar */
-  scrollbar-color: #22a4b9 #0a0a0a; /* Voor Firefox: kleur van de scrollbar en track */
+  scrollbar-color: #22a4b9 #f3f4f6; /* Voor Firefox: kleur van de scrollbar en track */
 }

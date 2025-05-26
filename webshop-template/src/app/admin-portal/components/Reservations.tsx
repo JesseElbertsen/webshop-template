@@ -36,9 +36,6 @@ export default function Reservations() {
                 Prijs
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
-                Nieuwe hoeveelheid
-              </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
                 Naam
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
@@ -51,7 +48,19 @@ export default function Reservations() {
                 Datum
               </th>
               <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
-                Actie
+                Aantal besteld
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Voorraad na reservering
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Totale prijs
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Opmerkingen
+              </th>
+              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+                Acties
               </th>
             </tr>
           </thead>
@@ -68,19 +77,28 @@ export default function Reservations() {
                 <td className="border px-2 py-1">
                   €{r.product?.price?.toFixed(2)}
                 </td>
-                <td className="border px-2 py-1">{r.product?.amount}</td>
                 <td className="border px-2 py-1">{r.name}</td>
                 <td className="border px-2 py-1">{r.email}</td>
                 <td className="border px-2 py-1">{r.phone}</td>
                 <td className="border px-2 py-1">
                   {new Date(r.createdAt).toLocaleString()}
                 </td>
+
+                <td className="border px-2 py-1">{r.amount}</td>
+                <td className="border px-2 py-1">{r.product?.amount}</td>
+
+                <td className="border px-2 py-1">
+                  {r.product?.price && r.amount
+                    ? `€${(r.product.price * r.amount).toFixed(2)}`
+                    : "-"}
+                </td>
+                <td className="border px-2 py-1">{r.note || "-"}</td>
                 <td className="border px-2 py-1">
                   <button
-                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded"
+                    className="bg-primary hover:bg-primary-light text-white px-3 py-1 rounded"
                     onClick={() => setConfirmId(r.id)}
                   >
-                    Afgehandeld
+                    Afhandelen
                   </button>
                 </td>
               </tr>
