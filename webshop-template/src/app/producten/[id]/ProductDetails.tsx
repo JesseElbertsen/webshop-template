@@ -26,7 +26,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   const isOutOfStock = product.amount === 0;
 
   return (
-    <div className="min-h-screen md:mt-8 md:p-0 p-2">
+    <div className="md:my-16 md:p-0 p-2">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-container shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
         <div className="w-full">

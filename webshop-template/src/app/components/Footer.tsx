@@ -13,8 +13,8 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="bg-primary text-white px-4 py-8">
-      <div className="flex flex-row">
+    <div className="bg-primary text-white px-4 py-8">
+      <div className="flex md:flex-row flex-col">
         <div className="flex flex-col items-center justify-center md:justify-start basis-2/5">
           <div className="w-48 h-48 bg-gray-200 rounded-full flex items-center justify-center mb-4">
             <PhotoIcon className="w-24 h-24 text-gray-500" />
@@ -56,10 +56,10 @@ export default function Footer() {
             ).map((dag) => (
               <div
                 key={dag}
-                className="text-sm border-b mb-3 border-border w-1/3"
+                className="flex justify-between items-center text-sm border-b mb-3 border-border w-1/2"
               >
-                <span className="capitalize">{dag}:</span>{" "}
-                {info.openingHours[dag]}
+                <span className="capitalize">{dag}:</span>
+                <span>{info.openingHours[dag]}</span>
               </div>
             ))}
         </div>
@@ -68,6 +68,6 @@ export default function Footer() {
       <div className="text-center text-xs mt-8 opacity-70">
         © 2025 Build by Jesse — Alle rechten voorbehouden.
       </div>
-    </footer>
+    </div>
   );
 }
