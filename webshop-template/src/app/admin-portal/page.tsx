@@ -5,7 +5,7 @@ import ProductList from "./components/ProductList";
 import ProductForm from "./components/ProductForm";
 import Reservations from "./components/Reservations";
 import BusinessInfoForm from "./components/BusinessInfoForm";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 export default function AdminPortalPage() {
   const [active, setActive] = React.useState<string>("products");
@@ -38,12 +38,6 @@ export default function AdminPortalPage() {
         {active === "reservations" && <Reservations />}
         {active === "businessinfo" && <BusinessInfoForm />}
       </main>
-      <button
-        className="absolute top-4 right-4 px-4 py-2 bg-primary text-white rounded"
-        onClick={() => signOut()}
-      >
-        Uitloggen
-      </button>
     </div>
   );
 }

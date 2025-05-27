@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { MoonIcon, SunIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 interface DashboardNavBarProps {
   active: string;
@@ -92,6 +93,12 @@ export default function DashboardNavbar({
           <span className="sr-only">Terug naar site</span>
         </Link>
       </div>
+      <button
+        className="w-full mt-2 px-4 py-2 bg-primary text-white rounded"
+        onClick={() => signOut()}
+      >
+        Uitloggen
+      </button>
     </nav>
   );
 }
