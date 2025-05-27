@@ -6,7 +6,7 @@ export default function ConditionalNavBar() {
   const pathname = usePathname();
   if (pathname.startsWith("/admin-portal")) return null;
   return (
-    <header className="pb-[6rem] md:pb-0">
+    <header className="md:pb-0">
       <Footer />
     </header>
   );

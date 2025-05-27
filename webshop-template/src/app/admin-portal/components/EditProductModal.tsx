@@ -65,7 +65,7 @@ export default function EditProductModal({
         onClick={onClose}
       />
       {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-lg p-8 z-10 w-full max-w-md">
+      <div className="relative bg-container rounded-lg shadow-lg p-8 z-10 w-full max-w-md">
         <button
           className="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl"
           onClick={onClose}
@@ -87,7 +87,7 @@ export default function EditProductModal({
               name="title"
               value={form.title}
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="border border-border  p-2 rounded w-full"
               placeholder="Titel"
               required
             />
@@ -98,7 +98,7 @@ export default function EditProductModal({
               name="description"
               value={form.description}
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="border border-border p-2 rounded w-full"
               placeholder="Beschrijving"
               required
             />
@@ -118,7 +118,7 @@ export default function EditProductModal({
                     onChange={(e) =>
                       handleSpecChange(idx, "key", e.target.value)
                     }
-                    className="border p-2 rounded w-1/3"
+                    className="border border-border p-2 rounded w-1/3"
                   />
                   <input
                     type="text"
@@ -127,7 +127,7 @@ export default function EditProductModal({
                     onChange={(e) =>
                       handleSpecChange(idx, "value", e.target.value)
                     }
-                    className="border p-2 rounded w-1/2"
+                    className="border border-border p-2 rounded w-1/2"
                   />
                   <button
                     type="button"
@@ -156,7 +156,7 @@ export default function EditProductModal({
               type="number"
               value={form.amount}
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="border border-border p-2 rounded w-full"
               placeholder="Voorraad"
               required
             />
@@ -169,7 +169,7 @@ export default function EditProductModal({
               step="0.01"
               value={form.price}
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="border border-border p-2 rounded w-full"
               placeholder="Nieuwe prijs"
               required
             />
@@ -184,7 +184,7 @@ export default function EditProductModal({
               step="0.01"
               value={form.oldPrice ?? ""}
               onChange={handleChange}
-              className="border p-2 rounded w-full"
+              className="border border-border p-2 rounded w-full"
               placeholder="Oude prijs"
             />
           </div>

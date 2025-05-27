@@ -7,16 +7,57 @@ import {
   InformationCircleIcon,
   ShoppingBagIcon,
   EnvelopeIcon,
+  MoonIcon,
+  SunIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Voorkomen dat je kunt scrollen als het menu open is
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
+
+  // Lees dark mode voorkeur uit localStorage bij mount
+  useEffect(() => {
+    setMounted(true);
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    } else if (stored === "light") {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    } else {
+      // Optioneel: volg systeemvoorkeur
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (prefersDark) {
+        document.documentElement.classList.add("dark");
+        setIsDark(true);
+      }
+    }
+  }, []);
+
+  // Toggle dark mode en sla op in localStorage
+  function toggleDarkMode() {
+    const newDark = !isDark;
+    setIsDark(newDark);
+    if (newDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  if (!mounted) return null; // Of een skeleton/spinner
 
   // Nav items met hun href en icon
   const navLinks = [
@@ -33,7 +74,7 @@ const Navbar = () => {
         <Link href="/" className="text-2xl text-text z-50">
           logo hier
         </Link>
-        <ul className="flex space-x-10">
+        <ul className="flex space-x-10 items-center">
           {navLinks.map((link, index) => (
             <li key={index} className="group flex items-center gap-2">
               <a
@@ -45,6 +86,24 @@ const Navbar = () => {
               </a>
             </li>
           ))}
+          {/* Dark mode toggle button */}
+          <li>
+            <button
+              onClick={toggleDarkMode}
+              className="transition z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full flex items-center justify-center"
+              title={
+                isDark ? "Schakel licht modus in" : "Schakel donker modus in"
+              }
+              aria-label="Toggle dark mode"
+              type="button"
+            >
+              {isDark ? (
+                <MoonIcon className="w-6 h-6" />
+              ) : (
+                <SunIcon className="w-6 h-6" />
+              )}
+            </button>
+          </li>
         </ul>
       </div>
 
@@ -84,6 +143,24 @@ const Navbar = () => {
                 </a>
               </li>
             ))}
+            {/* Dark mode toggle for mobile */}
+            <li>
+              <button
+                onClick={toggleDarkMode}
+                className="transition z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full flex items-center justify-center text-2xl"
+                title={
+                  isDark ? "Schakel licht modus in" : "Schakel donker modus in"
+                }
+                aria-label="Toggle dark mode"
+                type="button"
+              >
+                {isDark ? (
+                  <MoonIcon className="w-8 h-8" />
+                ) : (
+                  <SunIcon className="w-8 h-8" />
+                )}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

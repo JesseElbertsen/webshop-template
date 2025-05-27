@@ -36,7 +36,7 @@ export default function ReservationModal({
         onClick={onClose}
       />
       {/* Modal */}
-      <div className="relative bg-white rounded-lg shadow-lg p-8 z-10 w-full max-w-md">
+      <div className="relative bg-container rounded-lg shadow-lg p-8 z-10 w-full max-w-md">
         <button
           className="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl"
           onClick={onClose}

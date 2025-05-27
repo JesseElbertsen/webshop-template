@@ -71,7 +71,7 @@ export default function ProductCard({
             </div>
 
             {/* Beschrijving */}
-            <p className="bg-container-light border border-border p-2 text-text-light rounded inset-shadow-2xs h-[6rem] overflow-hidden">
+            <p className="bg-container-light border border-border p-2 text-text-light rounded inset-shadow-2xs h-[5rem] overflow-hidden break-words line-clamp-3">
               {description}
             </p>
 

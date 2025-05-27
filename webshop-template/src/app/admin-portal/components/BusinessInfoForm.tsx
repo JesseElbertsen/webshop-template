@@ -82,49 +82,49 @@ export default function BusinessInfoForm() {
               name="adres"
               value={info.adres}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="Adres"
             />
             <input
               name="postcode"
               value={info.postcode}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="Postcode"
             />
             <input
               name="locatie"
               value={info.locatie}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="Locatie"
             />
             <input
               name="telefoon"
               value={info.telefoon}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="Telefoon"
             />
             <input
               name="email"
               value={info.email}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="E-mail"
             />
             <input
               name="kvk"
               value={info.kvk}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="KvK"
             />
             <input
               name="btw"
               value={info.btw}
               onChange={handleChange}
-              className="border p-2 rounded bg-white"
+              className="border border-border p-2 rounded bg-container-light"
               placeholder="BTW"
             />
           </div>
@@ -149,7 +149,7 @@ export default function BusinessInfoForm() {
                   onChange={(e) =>
                     handleOpeningHoursChange(dag, e.target.value)
                   }
-                  className="border p-2 rounded flex-1 bg-white"
+                  className="border border-border p-2 rounded flex-1 bg-container-light"
                   placeholder="Bijv. 9:00 - 18:00 of Gesloten"
                 />
               </div>

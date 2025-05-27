@@ -157,7 +157,7 @@ export default function ProductForm() {
           value={form.title}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <div className="mb-2">
@@ -167,7 +167,7 @@ export default function ProductForm() {
           value={form.description}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
 
@@ -180,14 +180,14 @@ export default function ProductForm() {
               placeholder="Kenmerk (bv. kleur)"
               value={spec.key}
               onChange={(e) => handleSpecChange(idx, "key", e.target.value)}
-              className="border p-2 rounded w-1/3"
+              className="bg-container-light text-text border border-border p-2 rounded w-1/3"
             />
             <input
               type="text"
               placeholder="Waarde (bv. rood)"
               value={spec.value}
               onChange={(e) => handleSpecChange(idx, "value", e.target.value)}
-              className="border p-2 rounded w-1/2"
+              className="bg-container-light text-text border border-border p-2 rounded w-1/2"
             />
             <button
               type="button"
@@ -209,11 +209,11 @@ export default function ProductForm() {
         </button>
         {/* Voorbeeld tekstvak met de toegevoegde specificaties */}
         <div className="mt-4">
-          <label className="block text-sm text-gray-600 mb-1">
+          <label className="block text-sm text-text-light mb-1">
             Voorbeeldweergave:
           </label>
           <textarea
-            className="border p-2 rounded w-full bg-gray-50 text-gray-700"
+            className="  p-2 rounded w-full bg-container-light text-text border border-border"
             rows={Math.max(2, form.info.length)}
             value={
               form.info.length === 0
@@ -235,7 +235,7 @@ export default function ProductForm() {
           value={form.type}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <div className="mb-2">
@@ -248,7 +248,7 @@ export default function ProductForm() {
           value={form.price}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <div className="mb-2">
@@ -260,7 +260,7 @@ export default function ProductForm() {
           step="0.01"
           value={form.oldPrice}
           onChange={handleChange}
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <div className="mb-2">
@@ -272,7 +272,7 @@ export default function ProductForm() {
           value={form.amount}
           onChange={handleChange}
           required
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <div className="mb-4">
@@ -285,7 +285,7 @@ export default function ProductForm() {
               handleImageUpload(e.target.files[0]);
             }
           }}
-          className="border p-2 rounded w-full bg-white"
+          className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
       </div>
       <button
