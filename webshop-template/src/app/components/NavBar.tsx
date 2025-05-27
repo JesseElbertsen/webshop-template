@@ -14,11 +14,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [isDark, setIsDark] = useState(
-    typeof window !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   // Voorkomen dat je kunt scrollen als het menu open is
@@ -26,11 +22,42 @@ const Navbar = () => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
-  // Sync dark mode state on mount
+  // Lees dark mode voorkeur uit localStorage bij mount
   useEffect(() => {
     setMounted(true);
-    setIsDark(document.documentElement.classList.contains("dark"));
+    const stored = localStorage.getItem("theme");
+    if (stored === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    } else if (stored === "light") {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    } else {
+      // Optioneel: volg systeemvoorkeur
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (prefersDark) {
+        document.documentElement.classList.add("dark");
+        setIsDark(true);
+      }
+    }
   }, []);
+
+  // Toggle dark mode en sla op in localStorage
+  function toggleDarkMode() {
+    const newDark = !isDark;
+    setIsDark(newDark);
+    if (newDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  if (!mounted) return null; // Of een skeleton/spinner
 
   // Nav items met hun href en icon
   const navLinks = [
@@ -39,14 +66,6 @@ const Navbar = () => {
     { name: "Producten", href: "/producten", icon: ShoppingBagIcon },
     { name: "Contact", href: "/contact", icon: EnvelopeIcon },
   ];
-
-  // Toggle dark mode
-  function toggleDarkMode() {
-    document.documentElement.classList.toggle("dark");
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }
-
-  if (!mounted) return null; // Of een skeleton/spinner
 
   return (
     <nav className="relative top-0 w-full z-50 shadow-xl text-xl bg-container">
