@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalNavBar from "./components/ConditionalNavBar";
 import ConditionalFooter from "./components/ConditionalFooter";
+import SessionWrapper from "./SessionWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,29 +102,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConditionalNavBar />
-        <main className="bg-background" role="main">
-          {children}
-        </main>
-        <footer>
-          <ConditionalFooter />
-        </footer>
-        {/* Cookie banner (voorbeeld, voeg component toe indien gewenst) */}
-        {/* <CookieBanner /> */}
-        {/* Google Analytics (optioneel, als je tracking wilt) */}
-        {/* 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-X"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'UA-XXXXXXX-X');
-            `,
-          }}
-        />
-        */}
+        <SessionWrapper>
+          <ConditionalNavBar />
+          <main className="bg-background" role="main">
+            {children}
+          </main>
+          <footer>
+            <ConditionalFooter />
+          </footer>
+        </SessionWrapper>
       </body>
     </html>
   );
