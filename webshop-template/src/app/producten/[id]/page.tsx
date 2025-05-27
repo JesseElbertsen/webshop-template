@@ -17,6 +17,10 @@ export default async function ProductPage({
   const product: Product = {
     ...dbProduct,
     oldPrice: dbProduct.oldPrice === null ? undefined : dbProduct.oldPrice,
+    info:
+      dbProduct.info && Array.isArray(dbProduct.info)
+        ? (dbProduct.info as { key: string; value: string }[])
+        : undefined,
   };
 
   return <ProductDetails product={product} />;
