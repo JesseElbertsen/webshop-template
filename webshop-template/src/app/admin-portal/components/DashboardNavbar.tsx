@@ -12,24 +12,20 @@ export default function DashboardNavbar({
   active,
   setActive,
 }: DashboardNavBarProps) {
-  const [isDark, setIsDark] = useState(
-    typeof window !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    }
+    setMounted(true);
+    setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
   function toggleDarkMode() {
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.toggle("dark");
-      setIsDark(document.documentElement.classList.contains("dark"));
-    }
+    document.documentElement.classList.toggle("dark");
+    setIsDark(document.documentElement.classList.contains("dark"));
   }
+
+  if (!mounted) return null; // Of een skeleton/spinner
 
   return (
     <nav className="h-full min-h-screen w-56 bg-container-dark shadow-md text-white flex flex-col py-8 px-4 gap-2 fixed left-0 top-0 z-20">

@@ -19,6 +19,7 @@ const Navbar = () => {
       ? document.documentElement.classList.contains("dark")
       : false
   );
+  const [mounted, setMounted] = useState(false);
 
   // Voorkomen dat je kunt scrollen als het menu open is
   useEffect(() => {
@@ -27,9 +28,8 @@ const Navbar = () => {
 
   // Sync dark mode state on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    }
+    setMounted(true);
+    setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
   // Nav items met hun href en icon
@@ -42,11 +42,11 @@ const Navbar = () => {
 
   // Toggle dark mode
   function toggleDarkMode() {
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.toggle("dark");
-      setIsDark(document.documentElement.classList.contains("dark"));
-    }
+    document.documentElement.classList.toggle("dark");
+    setIsDark(document.documentElement.classList.contains("dark"));
   }
+
+  if (!mounted) return null; // Of een skeleton/spinner
 
   return (
     <nav className="relative top-0 w-full z-50 shadow-xl text-xl bg-container">
