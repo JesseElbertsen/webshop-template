@@ -64,26 +64,26 @@ export default function ProductList() {
       <div className="max-h-[700px] overflow-y-auto rounded-lg border">
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-100 sticky top-0 z-10 border border-gray-200">
-              <th className="border px-2 py-1 w-40 sticky top-0 bg-muted z-10">
+            <tr className="bg-container-light sticky top-0 z-10 border border-border">
+              <th className="border border-border px-2 py-1 w-40 sticky top-0 bg-muted z-10">
                 Afbeelding
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Naam
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Prijs
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Type
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Aantal op voorraad
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Aanbieding
               </th>
-              <th className="border px-2 py-1 sticky top-0 bg-muted z-10">
+              <th className="border border-border px-2 py-1 sticky top-0 bg-muted z-10">
                 Acties
               </th>
             </tr>
@@ -100,9 +100,11 @@ export default function ProductList() {
                 return (
                   <tr
                     key={product.id}
-                    className={idx % 2 === 0 ? "bg-white" : "bg-gray-200"}
+                    className={
+                      idx % 2 === 0 ? "bg-container" : "bg-container-light"
+                    }
                   >
-                    <td className="border px-2 py-1 w-40 h-40">
+                    <td className="border border-border px-2 py-1 w-40 h-40">
                       {product.image &&
                       (product.image.startsWith("http") ||
                         product.image.startsWith("/")) ? (
@@ -119,18 +121,26 @@ export default function ProductList() {
                         </div>
                       )}
                     </td>
-                    <td className="border px-2 py-1">{product.title}</td>
-                    <td className="border px-2 py-1">€{product.price}</td>
-                    <td className="border px-2 py-1">{product.type}</td>
-                    <td className="border px-2 py-1">{product.amount}</td>
-                    <td className="border px-2 py-1">
+                    <td className="border border-border px-2 py-1">
+                      {product.title}
+                    </td>
+                    <td className="border border-border px-2 py-1">
+                      €{product.price}
+                    </td>
+                    <td className="border border-border px-2 py-1">
+                      {product.type}
+                    </td>
+                    <td className="border border-border px-2 py-1">
+                      {product.amount}
+                    </td>
+                    <td className="border border-border px-2 py-1">
                       {isSale ? (
                         <span className="text-green-600 font-bold">Ja</span>
                       ) : (
                         <span className="text-gray-400">Nee</span>
                       )}
                     </td>
-                    <td className="border px-2 py-1">
+                    <td className="border border-border px-2 py-1">
                       <div className="flex flex-col gap-2 items-center">
                         <button
                           className="bg-primary hover:bg-primary-light text-white font-semibold py-1 px-3 rounded w-32"
@@ -164,7 +174,7 @@ export default function ProductList() {
       {/* Popup melding */}
       {popup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+          <div className="bg-container rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
             <p className="mb-4 text-center">{popup}</p>
             <button
               className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
@@ -179,7 +189,7 @@ export default function ProductList() {
       {/* Popup voor verwijderen bevestigen */}
       {confirmDeleteId !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+          <div className="bg-container rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
             <p className="mb-4 text-center">
               Weet je zeker dat je dit product wilt verwijderen?
             </p>

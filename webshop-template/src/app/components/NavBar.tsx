@@ -7,16 +7,30 @@ import {
   InformationCircleIcon,
   ShoppingBagIcon,
   EnvelopeIcon,
+  MoonIcon,
+  SunIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [isDark, setIsDark] = useState(
+    typeof window !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : false
+  );
 
   // Voorkomen dat je kunt scrollen als het menu open is
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
+
+  // Sync dark mode state on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    }
+  }, []);
 
   // Nav items met hun href en icon
   const navLinks = [
@@ -26,6 +40,14 @@ const Navbar = () => {
     { name: "Contact", href: "/contact", icon: EnvelopeIcon },
   ];
 
+  // Toggle dark mode
+  function toggleDarkMode() {
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.toggle("dark");
+      setIsDark(document.documentElement.classList.contains("dark"));
+    }
+  }
+
   return (
     <nav className="relative top-0 w-full z-50 shadow-xl text-xl bg-container">
       {/* Desktop Navbar */}
@@ -33,7 +55,7 @@ const Navbar = () => {
         <Link href="/" className="text-2xl text-text z-50">
           logo hier
         </Link>
-        <ul className="flex space-x-10">
+        <ul className="flex space-x-10 items-center">
           {navLinks.map((link, index) => (
             <li key={index} className="group flex items-center gap-2">
               <a
@@ -45,6 +67,24 @@ const Navbar = () => {
               </a>
             </li>
           ))}
+          {/* Dark mode toggle button */}
+          <li>
+            <button
+              onClick={toggleDarkMode}
+              className="transition z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full flex items-center justify-center"
+              title={
+                isDark ? "Schakel licht modus in" : "Schakel donker modus in"
+              }
+              aria-label="Toggle dark mode"
+              type="button"
+            >
+              {isDark ? (
+                <MoonIcon className="w-6 h-6" />
+              ) : (
+                <SunIcon className="w-6 h-6" />
+              )}
+            </button>
+          </li>
         </ul>
       </div>
 
@@ -84,6 +124,24 @@ const Navbar = () => {
                 </a>
               </li>
             ))}
+            {/* Dark mode toggle for mobile */}
+            <li>
+              <button
+                onClick={toggleDarkMode}
+                className="transition z-50 bg-primary text-white px-4 py-2 rounded hover:bg-primary-light w-full flex items-center justify-center text-2xl"
+                title={
+                  isDark ? "Schakel licht modus in" : "Schakel donker modus in"
+                }
+                aria-label="Toggle dark mode"
+                type="button"
+              >
+                {isDark ? (
+                  <MoonIcon className="w-8 h-8" />
+                ) : (
+                  <SunIcon className="w-8 h-8" />
+                )}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <div className="bg-primary text-white px-4 py-8">
+    <div className="bg-container-dark text-white px-4 py-8">
       <div className="flex md:flex-row flex-col">
         <div className="flex flex-col items-center justify-center md:justify-start basis-2/5">
           <div className="w-48 h-48 bg-gray-200 rounded-full flex items-center justify-center mb-4">
