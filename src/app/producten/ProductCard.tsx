@@ -54,7 +54,7 @@ export default function ProductCard({
             )}
             {/* Kortingpercentage */}
             {discountPercentage && (
-              <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
+              <div className="absolute bottom-2 right-2 bg-red-400 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
                 <TagIcon className="w-4 h-4" />-{discountPercentage}%
               </div>
             )}
