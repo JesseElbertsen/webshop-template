@@ -87,7 +87,8 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         {/* Canonical URL */}
         <link rel="canonical" href="https://www.jouwwebshop.nl" />
-
+        {/* Manifest voor PWA support */}
+        <link rel="manifest" href="/manifest.json" />
         {/* Extra meta tags */}
         <meta name="theme-color" content="#22a4b9" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
