@@ -1,212 +1,97 @@
-import { Product } from "../types/types";
+// import { Product } from "../types/types";
 
-let products: Product[] = [
-  {
-    id: "1",
-    title: "Product A",
-    description: "Beschrijving van product A",
-    info: "Extra informatie over product A",
-    amount: 10,
-    image: "/images/product-a.jpg",
-    price: 29.99,
-    type: "a",
-    sale: {
-      oldPrice: 39.99,
-      newPrice: 29.99,
-    },
-  },
-  {
-    id: "2",
-    title: "Product B",
-    description: "Beschrijving van product B",
-    info: "Extra informatie over product B",
-    amount: 5,
-    image: "/images/product-b.jpg",
-    price: 49.99,
-    type: "b",
-  },
-  {
-    id: "3",
-    title: "Product C",
-    description: "Beschrijving van product C",
-    info: "Extra informatie over product C",
-    amount: 2,
-    image: "/images/product-c.jpg",
-    price: 19.99,
-    type: "c",
-    sale: {
-      oldPrice: 24.99,
-      newPrice: 19.99,
-    },
-  },
-  {
-    id: "4",
-    title: "Product D",
-    description: "Beschrijving van product D",
-    info: "Extra informatie over product D",
-    amount: 8,
-    image: "/images/product-d.jpg",
-    price: 39.99,
-    type: "a",
-  },
-  {
-    id: "5",
-    title: "Product E",
-    description: "Beschrijving van product E",
-    info: "Extra informatie over product E",
-    amount: 3,
-    image: "/images/product-e.jpg",
-    price: 59.99,
-    type: "b",
-    sale: {
-      oldPrice: 69.99,
-      newPrice: 59.99,
-    },
-  },
-  {
-    id: "6",
-    title: "Product F",
-    description: "Beschrijving van product F",
-    info: "Extra informatie over product F",
-    amount: 7,
-    image: "/images/product-f.jpg",
-    price: 24.99,
-    type: "c",
-    sale: {
-      oldPrice: 29.99,
-      newPrice: 24.99,
-    },
-  },
-  {
-    id: "7",
-    title: "Product G",
-    description: "Beschrijving van product G",
-    info: "Extra informatie over product G",
-    amount: 4,
-    image: "/images/product-g.jpg",
-    price: 34.99,
-    type: "a",
-  },
-  {
-    id: "8",
-    title: "Product H",
-    description: "Beschrijving van product H",
-    info: "Extra informatie over product H",
-    amount: 6,
-    image: "/images/product-h.jpg",
-    price: 44.99,
-    type: "b",
-  },
-  {
-    id: "9",
-    title: "Product I",
-    description: "Beschrijving van product I",
-    info: "Extra informatie over product I",
-    amount: 1,
-    image: "/images/product-b.jpg",
-    price: 19.99,
-    type: "c",
-    sale: {
-      oldPrice: 24.99,
-      newPrice: 19.99,
-    },
-  },
-  {
-    id: "10",
-    title: "Product J",
-    description: "Beschrijving van product J",
-    info: "Extra informatie over product J",
-    amount: 9,
-    image: "/images/product-c.jpg",
-    price: 29.99,
-    type: "a",
-  },
-  {
-    id: "11",
-    title: "Product K",
-    description: "Beschrijving van product K",
-    info: "Extra informatie over product K",
-    amount: 2,
-    image: "/images/product-d.jpg",
-    price: 49.99,
-    type: "b",
-  },
-  {
-    id: "12",
-    title: "Product L",
-    description: "Beschrijving van product L",
-    info: "Extra informatie over product L",
-    amount: 5,
-    image: "/images/product-e.jpg",
-    price: 39.99,
-    type: "c",
-  },
-  {
-    id: "13",
-    title: "Product M",
-    description: "Beschrijving van product M",
-    info: "Extra informatie over product M",
-    amount: 8,
-    image: "/images/product-f.jpg",
-    price: 24.99,
-    type: "a",
-    sale: {
-      oldPrice: 29.99,
-      newPrice: 24.99,
-    },
-  },
-  {
-    id: "14",
-    title: "Product N",
-    description: "Beschrijving van product N",
-    info: "Extra informatie over product N",
-    amount: 3,
-    image: "/images/product-g.jpg",
-    price: 34.99,
-    type: "b",
-  },
-  {
-    id: "15",
-    title: "Product O",
-    description: "Beschrijving van product O",
-    info: "Extra informatie over product O",
-    amount: 6,
-    image: "/images/product-h.jpg",
-    price: 44.99,
-    type: "c",
-    sale: {
-      oldPrice: 49.99,
-      newPrice: 44.99,
-    },
-  },
-];
+// const products: Product[] = [
+//   {
+//     id: 1,
+//     title: "Product A",
+//     description: "Beschrijving van product A",
+//     info: [{ key: "extra", value: "Extra informatie over product A" }],
+//     amount: 10,
+//     image: "/images/product-a.jpg",
+//     price: 29.99,
+//     oldPrice: 39.99, // SALE
+//     type: "optie 1",
+//   },
+//   {
+//     id: 2,
+//     title: "Product B",
+//     description: "Beschrijving van product B",
+//     info: [{ key: "extra", value: "Extra informatie over product B" }],
+//     amount: 5,
+//     image: "/images/product-b.jpg",
+//     price: 49.99,
+//     type: "optie 2",
+//   },
+//   {
+//     id: 3,
+//     title: "Product C",
+//     description: "Beschrijving van product C",
+//     info: [{ key: "extra", value: "Extra informatie over product C" }],
+//     amount: 20,
+//     image: "/images/product-c.jpg",
+//     price: 19.99,
+//     type: "optie 3",
+//   },
+//   {
+//     id: 4,
+//     title: "Product D",
+//     description: "Beschrijving van product D",
+//     info: [{ key: "extra", value: "Extra informatie over product D" }],
+//     amount: 15,
+//     image: "/images/product-d.jpg",
+//     price: 99.99,
+//     oldPrice: 129.99, // SALE
+//     type: "optie 1",
+//   },
+//   {
+//     id: 5,
+//     title: "Product E",
+//     description: "Beschrijving van product E",
+//     info: [{ key: "extra", value: "Extra informatie over product E" }],
+//     amount: 8,
+//     image: "/images/product-e.jpg",
+//     price: 59.99,
+//     type: "optie 2",
+//   },
+//   {
+//     id: 6,
+//     title: "Product F",
+//     description: "Beschrijving van product F",
+//     info: [{ key: "extra", value: "Extra informatie over product F" }],
+//     amount: 12,
+//     image: "/images/product-f.jpg",
+//     price: 39.99,
+//     type: "optie 3",
+//   },
+//   {
+//     id: 7,
+//     title: "Product G",
+//     description: "Beschrijving van product G",
+//     info: [{ key: "extra", value: "Extra informatie over product G" }],
+//     amount: 18,
+//     image: "/images/product-g.jpg",
+//     price: 89.99,
+//     oldPrice: 109.99, // SALE
+//     type: "optie 1",
+//   },
+//   {
+//     id: 8,
+//     title: "Product H",
+//     description: "Beschrijving van product H",
+//     info: [{ key: "extra", value: "Extra informatie over product H" }],
+//     amount: 25,
+//     image: "/images/product-h.jpg",
+//     price: 24.99,
+//     type: "optie 2",
+//   },
+// ];
 
-// Haal alle producten op
-export async function getProducts(): Promise<Product[]> {
-  return products;
-}
+// // Haal alle producten op
+// export async function getProducts(): Promise<Product[]> {
+//   return products;
+// }
 
 // Voeg een nieuw product toe
-export async function addProduct(newProduct: Product): Promise<Product[]> {
-  products.push({ ...newProduct, id: (products.length + 1).toString() });
-  return products;
-}
-
-// Werk een bestaand product bij
-export async function updateProduct(
-  updatedProduct: Product
-): Promise<Product[]> {
-  products = products.map((product) =>
-    product.id === updatedProduct.id ? updatedProduct : product
-  );
-  return products;
-}
-
-// Verwijder een product
-export async function deleteProduct(id: string): Promise<Product[]> {
-  products = products.filter((product) => product.id !== id);
-  return products;
-}
 
 export async function getPageContent(slug: string) {
   const dummyPages: Record<string, { title: string; body: string }> = {

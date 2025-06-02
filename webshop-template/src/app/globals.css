@@ -1,35 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #eeeeee;
-  --foreground: #171717;
-}
-
 @theme {
-  --color-primary: #22a4b9; /* Voor buttons, links en accentkleuren */
-  --color-primary-light: #60a5fa; /* Voor hover-effecten en lichte accenten */
-  --color-primary-dark: #1e40af; /* Voor actieve states, headers */
-  --color-secondary: #3b82f6; /* */
-  --color-muted: #e0f2fe; /* Achtergrond voor cards of notificaties */
+  --color-primary: var(--color-primary);
+  --color-primary-light: var(--color-primary-light);
+  --color-container: var(--color-container);
+  --color-container-light: var(--color-container-light);
+  --color-container-dark: var(--color-container-dark);
+  --color-text: var(--color-text);
+  --color-text-light: var(--color-text-light);
+  --color-border: var(--color-border);
+  --color-background: var(--color-background);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --color-primary: #22a4b9;
+  --color-primary-light: #60a5fa;
+  --color-container: #ffffff;
+  --color-container-light: #f7fafc;
+  --color-container-dark: #213c47;
+  --color-text: #171717;
+  --color-text-light: #6b7280;
+  --color-border: #cbd5e1;
+  --color-background: #f3f4f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a; */
-    --foreground: #818181;
-  }
+.dark {
+  --color-primary: #22a4b9;
+  --color-primary-light: #60a5fa;
+  --color-container: #1a1a1a;
+  --color-container-light: #1e1e1e;
+  --color-container-dark: #213c47;
+  --color-text: #ffffff;
+  --color-text-light: #818181;
+  --color-border: #6b7280;
+  --color-background: #0a0a0a;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -39,7 +48,6 @@ body {
 }
 
 .slider-scrollbar::-webkit-scrollbar-track {
-  background: #f0f0f0; /* Achtergrond van de scrollbar-track */
   border-radius: 10px; /* Afgeronde hoeken */
   margin: 4px 10px; /* Ruimte tussen de scrollbar en de content */
 }
@@ -47,10 +55,4 @@ body {
 .slider-scrollbar::-webkit-scrollbar-thumb {
   background-color: #22a4b9; /* Kleur van de scrollbar (bijvoorbeeld de kleur van je button) */
   border-radius: 10px; /* Afgeronde hoeken */
-  border: 2px solid #f0f0f0; /* Ruimte tussen de scrollbar en de track */
-}
-
-.slider-scrollbar {
-  scrollbar-width: thin; /* Voor Firefox: dunne scrollbar */
-  scrollbar-color: #22a4b9 #f0f0f0; /* Voor Firefox: kleur van de scrollbar en track */
 }
