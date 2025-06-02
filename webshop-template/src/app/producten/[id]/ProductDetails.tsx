@@ -11,7 +11,9 @@ import {
   DocumentTextIcon,
   InformationCircleIcon,
   BookmarkIcon,
+  ArrowLeftIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function ProductDetails({ product }: { product: Product }) {
   const discountPercentage =
@@ -28,6 +30,16 @@ export default function ProductDetails({ product }: { product: Product }) {
 
   return (
     <div className="md:my-16 md:p-0 p-2">
+      {/* Back button */}
+      <div className="max-w-7xl mx-auto mb-4">
+        <Link
+          href="/producten"
+          className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+        >
+          <ArrowLeftIcon className="w-5 h-5" />
+          Terug naar producten
+        </Link>
+      </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-container shadow rounded-xl md:p-6 p-2">
         {/* Productafbeelding */}
         <div className="w-full">
@@ -68,7 +80,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 )}
               </>
             ) : (
-              <div className="md:w-[600px] md:h-[500px] bg-black rounded-md flex items-center justify-center text-gray-400">
+              <div className="md:w-[600px] md:h-[500px] bg-gray-200 rounded-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-24 h-24" />
               </div>
             )}

@@ -48,7 +48,7 @@ export default function ProductCard({
                 className="rounded-t-md h-50 w-full object-cover"
               />
             ) : (
-              <div className="w-full h-50 bg-black rounded-t-md flex items-center justify-center text-gray-400">
+              <div className="w-full h-50 bg-gray-200 rounded-t-md flex items-center justify-center text-gray-400">
                 <PhotoIcon className="w-16 h-16" />
               </div>
             )}
