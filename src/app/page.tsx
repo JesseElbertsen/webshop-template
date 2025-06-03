@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       {/* SaleItems */}
-      <div className="flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4">
+      <div className="flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 lg:mt-[8rem]">
         <SaleItems />
       </div>
     </section>
