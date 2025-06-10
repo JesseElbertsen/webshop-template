@@ -1,3 +1,9 @@
+/**
+ * ProductDetails component
+ * Toont alle details van één product, inclusief afbeelding, prijs, voorraad, specificaties en reserveren.
+ * Bevat een terug-knop, een afbeelding-modal en een reserveren-modal.
+ */
+
 "use client";
 
 import Image from "next/image";
@@ -16,6 +22,7 @@ import {
 import Link from "next/link";
 
 export default function ProductDetails({ product }: { product: Product }) {
+  // Bereken het kortingspercentage als het product is afgeprijsd
   const discountPercentage =
     product.oldPrice && product.oldPrice > product.price
       ? Math.round(
@@ -23,14 +30,16 @@ export default function ProductDetails({ product }: { product: Product }) {
         )
       : null;
 
+  // State voor modals (reserveren en afbeelding)
   const [modalOpen, setModalOpen] = useState(false);
   const [imageModalOpen, setImageModalOpen] = useState(false);
 
+  // Controleer of het product uitverkocht is
   const isOutOfStock = product.amount === 0;
 
   return (
     <div className="md:my-16 md:p-0 p-2">
-      {/* Back button */}
+      {/* Terug naar producten */}
       <div className="max-w-7xl mx-auto mb-4">
         <Link
           href="/producten"
@@ -41,7 +50,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         </Link>
       </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 bg-container shadow rounded-xl md:p-6 p-2">
-        {/* Productafbeelding */}
+        {/* Productafbeelding met modal voor vergroting */}
         <div className="w-full">
           <div className="relative">
             {product.image &&
@@ -56,6 +65,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                   className="rounded-md object-cover w-[700px] h-[500px] cursor-zoom-in"
                   onClick={() => setImageModalOpen(true)}
                 />
+                {/* Modal voor grote afbeelding */}
                 {imageModalOpen && (
                   <div
                     className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
@@ -87,9 +97,10 @@ export default function ProductDetails({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Productinformatie */}
+        {/* Productinformatie en acties */}
         <div className="flex flex-col justify-between">
           <div className="font-bold">
+            {/* Titel en korting */}
             <h1 className="text-3xl font-bold text-text flex items-center gap-2 justify-between">
               {product.title}
               {discountPercentage && (
@@ -98,6 +109,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </span>
               )}
             </h1>
+            {/* Beschrijving */}
             <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
               <h2 className="mb-2 flex items-center gap-2">
                 <DocumentTextIcon className="w-5 h-5 text-primary" />
@@ -105,6 +117,7 @@ export default function ProductDetails({ product }: { product: Product }) {
               </h2>
               <p className="text-text">{product.description}</p>
             </div>
+            {/* Specificaties */}
             {product.info && product.info.length > 0 && (
               <div className="mt-4 bg-container-light border border-border p-4 rounded-md shadow-md">
                 <h2 className="mb-2 flex items-center gap-2">
@@ -125,7 +138,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             )}
           </div>
 
-          {/* Acties */}
+          {/* Prijs, voorraad en reserveren */}
           <div className="mt-8">
             <div className="flex items-center justify-between p-4">
               {product.oldPrice && product.oldPrice > product.price ? (
@@ -144,6 +157,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                   €{product.price.toFixed(2)}
                 </p>
               )}
+              {/* Voorraad */}
               <div>
                 <p className=" bg-gray-400 text-white px-4 py-2 rounded-md flex items-center gap-1">
                   <CubeIcon className="w-5 h-5" />
@@ -151,6 +165,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 </p>
               </div>
             </div>
+            {/* Uitverkocht of reserveren */}
             {isOutOfStock ? (
               <div className="bg-red-100 text-red-700 px-4 py-2 rounded text-center font-semibold mt-4">
                 Dit product is momenteel niet op voorraad
@@ -164,6 +179,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 Dit product reserveren
               </button>
             )}
+            {/* Modal voor reserveren */}
             <ReservationModal
               productId={product.id}
               productPrice={product.price}

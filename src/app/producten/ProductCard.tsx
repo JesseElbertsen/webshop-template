@@ -1,3 +1,10 @@
+/**
+ * ProductCard component
+ * Toont een productkaart met afbeelding, titel, beschrijving, prijs, korting en badge.
+ * Klikken op de kaart navigeert naar de detailpagina van het product.
+ * Animatie bij in beeld komen via framer-motion.
+ */
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,19 +17,21 @@ export default function ProductCard({
   title,
   image,
   price,
-  // amount,
   description,
   oldPrice,
   index,
 }: Product & { index: number }) {
+  // Detecteer of de kaart in beeld is voor animatie
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
+  // Bereken het kortingspercentage als het product is afgeprijsd
   const discountPercentage =
     oldPrice && oldPrice > price
       ? Math.round(((oldPrice - price) / oldPrice) * 100)
       : null;
 
   return (
+    // Animatie wrapper voor fade-in effect
     <motion.div
       ref={ref}
       custom={index}
@@ -34,9 +43,10 @@ export default function ProductCard({
         delay: inView ? index * 0.2 : 0,
       }}
     >
+      {/* Klikbare kaart die naar de product detailpagina leidt */}
       <Link href={`/producten/${id}`}>
         <div className="shadow-xl rounded-md bg-container  cursor-pointer   h-[430px] flex flex-col justify-between relative">
-          {/* Productafbeelding */}
+          {/* Productafbeelding of placeholder */}
           <div className="relative">
             {image && (image.startsWith("http") || image.startsWith("/")) ? (
               <Image
@@ -52,7 +62,7 @@ export default function ProductCard({
                 <PhotoIcon className="w-16 h-16" />
               </div>
             )}
-            {/* Kortingpercentage */}
+            {/* Kortingpercentage badge */}
             {discountPercentage && (
               <div className="absolute bottom-2 right-2 bg-red-500 text-white font-bold px-2 py-1 rounded-md flex items-center gap-1">
                 <TagIcon className="w-4 h-4" />-{discountPercentage}%
@@ -60,22 +70,19 @@ export default function ProductCard({
             )}
           </div>
           <div className="p-4">
-            {/* Titel en aantal */}
+            {/* Titel van het product */}
             <div className="flex justify-between items-center ">
               <h2 className="text-lg font-semibold text-text break-words truncate p-2">
                 {title}
               </h2>
-              {/* <p className="inline-block text-gray-400 px-4 py-2 rounded-md">
-                aantal: x {amount}
-              </p> */}
             </div>
 
-            {/* Beschrijving */}
+            {/* Korte beschrijving */}
             <p className="bg-container-light border border-border p-2 text-text-light rounded inset-shadow-2xs h-[5rem] overflow-hidden break-words line-clamp-3">
               {description}
             </p>
 
-            {/* Prijzen */}
+            {/* Prijzen en badge */}
             <div className="mt-4 flex items-center justify-between">
               {oldPrice && oldPrice > price ? (
                 <div className="flex flex-col items-start">

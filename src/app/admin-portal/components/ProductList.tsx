@@ -58,7 +58,7 @@ export default function ProductList() {
   if (loading) return <div>Producten laden...</div>;
 
   return (
-    <div className=" bg-container shadow-md p-4 w-2/3 mx-auto">
+    <div className=" bg-container shadow-md p-4 w-3/4 mx-auto">
       <h2 className="text-xl font-bold mb-4">Product Overzicht</h2>
       <SearchFunction value={search} onChange={setSearch} />
       <div className="max-h-[700px] overflow-y-auto rounded-lg border">
@@ -173,8 +173,8 @@ export default function ProductList() {
 
       {/* Popup melding */}
       {popup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-container rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40  ">
+          <div className="bg-container rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center ">
             <p className="mb-4 text-center">{popup}</p>
             <button
               className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-light"
@@ -188,7 +188,7 @@ export default function ProductList() {
 
       {/* Popup voor verwijderen bevestigen */}
       {confirmDeleteId !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 ">
           <div className="bg-container rounded-lg shadow-lg p-6 min-w-[300px] flex flex-col items-center">
             <p className="mb-4 text-center">
               Weet je zeker dat je dit product wilt verwijderen?

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Product } from "../../types/types";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 
@@ -13,6 +13,14 @@ export default function EditProductModal({
   onClose: () => void;
 }) {
   const [form, setForm] = useState(product);
+
+  // Blokkeer body scroll als de modal open is
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   // Voeg een nieuwe lege specificatie toe
   function handleAddSpec() {
@@ -52,20 +60,20 @@ export default function EditProductModal({
       ...f,
       [name]:
         name === "amount" || name === "price" || name === "oldPrice"
-          ? Number(value)
+          ? value === ""
+            ? undefined
+            : Number(value)
           : value,
     }));
   }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Blur background */}
       <div
         className="fixed inset-0 bg-black/30 backdrop-blur-sm"
         onClick={onClose}
       />
-      {/* Modal */}
-      <div className="relative bg-container rounded-lg shadow-lg p-8 z-10 w-full max-w-md">
+      <div className="relative bg-container rounded-lg shadow-lg p-8 z-10 w-full max-w-xl max-h-screen overflow-y-auto">
         <button
           className="absolute top-2 right-2 text-gray-400 hover:text-black text-2xl"
           onClick={onClose}
@@ -107,7 +115,7 @@ export default function EditProductModal({
             <label className="block mb-1 font-semibold">Specificaties</label>
             <div
               className="max-h-56 overflow-y-auto"
-              style={{ maxHeight: "14rem" }} // 4 x ~3.5rem per rij
+              style={{ maxHeight: "14rem" }}
             >
               {(form.info ?? []).map((spec, idx) => (
                 <div key={idx} className="flex gap-2 mb-2">
@@ -167,7 +175,11 @@ export default function EditProductModal({
               name="price"
               type="number"
               step="0.01"
-              value={form.price}
+              value={
+                form.price === undefined || form.price === null
+                  ? ""
+                  : form.price
+              }
               onChange={handleChange}
               className="border border-border p-2 rounded w-full"
               placeholder="Nieuwe prijs"
@@ -182,7 +194,11 @@ export default function EditProductModal({
               name="oldPrice"
               type="number"
               step="0.01"
-              value={form.oldPrice ?? ""}
+              value={
+                form.oldPrice === undefined || form.oldPrice === null
+                  ? ""
+                  : form.oldPrice
+              }
               onChange={handleChange}
               className="border border-border p-2 rounded w-full"
               placeholder="Oude prijs"

@@ -55,7 +55,7 @@ export default function ProductForm() {
     const { name, value, type } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: type === "number" ? Number(value) : value,
+      [name]: type === "number" ? (value === "" ? "" : value) : value,
     }));
   };
 
@@ -245,7 +245,7 @@ export default function ProductForm() {
           type="number"
           min="0"
           step="0.01"
-          value={form.price}
+          value={form.price === "" ? "" : form.price}
           onChange={handleChange}
           required
           className=" p-2 rounded w-full bg-container-light text-text border border-border"
@@ -258,7 +258,7 @@ export default function ProductForm() {
           type="number"
           min="0"
           step="0.01"
-          value={form.oldPrice}
+          value={form.oldPrice === "" ? "" : form.oldPrice}
           onChange={handleChange}
           className=" p-2 rounded w-full bg-container-light text-text border border-border"
         />
